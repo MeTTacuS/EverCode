@@ -34,6 +34,7 @@
             // buttonIdentify
             // 
             this.buttonIdentify.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.buttonIdentify.AutoSize = true;
             this.buttonIdentify.Location = new System.Drawing.Point(65, 69);
             this.buttonIdentify.Name = "buttonIdentify";
             this.buttonIdentify.Size = new System.Drawing.Size(96, 39);
@@ -46,11 +47,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(230, 291);
             this.Controls.Add(this.buttonIdentify);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

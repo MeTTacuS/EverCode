@@ -19,7 +19,9 @@ namespace What_s_That
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            Button newButton = new Button();
+            newButton.Location = new Point(500, 3);
+            this.Controls.Add(newButton);
         }
     }
 }
