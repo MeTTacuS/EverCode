@@ -16,5 +16,10 @@ namespace What_s_That
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
