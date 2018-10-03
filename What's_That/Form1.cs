@@ -7,46 +7,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Emgu.CV;
+using Emgu.CV.UI;
 
 namespace What_s_That
 {
     public partial class MainWindow : Form
     {
-        VideoCapture capture;
-
         public MainWindow()
         {
+            SetDllPath();
             InitializeComponent();
         }
 
-        private void buttonIdentify_Click(object sender, EventArgs e)
+        private void SetDllPath()
         {
-            Run();
+            var dllDirectory = @"../../DLL";
+            Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + dllDirectory);
         }
 
-        /*
-         * Function that starts the face-recognition system
-         */
-        private void Run()
+        private void ButtonIdentify_Click(object sender, EventArgs e)
         {
-            try
-            {
-                capture = new VideoCapture();
-                
-            }
-            catch (Exception Ex)
-            {
-                MessageBox.Show(Ex.Message);
-                throw;
-            }
-            Application.Idle += ProcessFrame;
-        }
-        private void ProcessFrame(object sender, EventArgs e)
-        {
-            imgCamUser.Image = capture.QuerySmallFrame();
+            Recognition rec = new Recognition();
         }
 
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }
