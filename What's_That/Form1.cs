@@ -19,6 +19,10 @@ namespace What_s_That
             InitializeComponent();
         }
 
+        /*
+         * A method that sets the path to the folder that contains 
+         * all DLL's used for face recognition and detection
+         */
         private void SetDllPath()
         {
             var dllDirectory = @"../../DLL";

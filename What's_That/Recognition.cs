@@ -8,6 +8,11 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using System.Windows.Forms;
 
+/*
+ * A basic face detection and recognition class
+ * Stores faces and their labels in Faces directory
+ */
+
 namespace What_s_That
 {
     class Recognition
