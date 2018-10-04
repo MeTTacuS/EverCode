@@ -20,7 +20,7 @@ namespace What_s_That
         {
             SetDllPath();
             InitializeComponent();
-            rec = new Recognition(imgCamUser);
+            rec = new Recognition(box : imgCamUser);
         }
 
         private void buttonAddFace_Click(object sender, EventArgs e)
@@ -34,7 +34,7 @@ namespace What_s_That
          */
         private void SetDllPath()
         {
-            var dllDirectory = @"../../DLL";
+            string dllDirectory = @"../../DLL";
             Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + dllDirectory);
         }
 
