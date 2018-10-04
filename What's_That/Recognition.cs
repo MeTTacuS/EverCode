@@ -29,7 +29,7 @@ namespace What_s_That
         List<Image<Gray, byte>> _trainingImages = new List<Image<Gray, byte>>();
         List<string> _labels = new List<string>();
         List<string> _users = new List<string>();
-        int _count, _numOfLabels, _t = 1;
+        int _count, _numOfLabels, _t;
         string _name, _names;
         MCvFont font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_TRIPLEX, 0.6d, 0.6d);
         private ImageBox _cameraBox;
@@ -89,7 +89,7 @@ namespace What_s_That
                     _frame.Draw(_name, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.Green));
 
                 }
-                //users[t - 1] = name;
+                //_users[t - 1] = name;
                 _users.Add("");
             }
             _cameraBox.Image = _frame;

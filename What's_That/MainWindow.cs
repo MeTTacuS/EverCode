@@ -13,7 +13,9 @@ namespace What_s_That
 {
     public partial class MainWindow : Form
     {
-        Recognition rec;
+        #region Variables
+        Recognition rec; //Face detection and recognition
+        #endregion
         public MainWindow()
         {
             SetDllPath();
