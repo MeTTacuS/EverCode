@@ -13,12 +13,19 @@ namespace What_s_That
 {
     public partial class MainWindow : Form
     {
+        Recognition rec;
         public MainWindow()
         {
             SetDllPath();
             InitializeComponent();
+            rec = new Recognition(imgCamUser);
         }
 
+        private void buttonAddFace_Click(object sender, EventArgs e)
+        {
+            rec.AddFace(nameTextBox);
+        }
+        
         /*
          * A method that sets the path to the folder that contains 
          * all DLL's used for face recognition and detection
@@ -27,11 +34,6 @@ namespace What_s_That
         {
             var dllDirectory = @"../../DLL";
             Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + dllDirectory);
-        }
-
-        private void ButtonIdentify_Click(object sender, EventArgs e)
-        {
-            Recognition rec = new Recognition();
         }
 
         private void MainWindow_Load(object sender, EventArgs e)

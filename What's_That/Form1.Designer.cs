@@ -29,25 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.buttonIdentify = new System.Windows.Forms.Button();
             this.buttonAddFace = new System.Windows.Forms.Button();
             this.imgCamUser = new Emgu.CV.UI.ImageBox();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.imgCamUser)).BeginInit();
             this.SuspendLayout();
-            // 
-            // buttonIdentify
-            // 
-            this.buttonIdentify.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.buttonIdentify.AutoSize = true;
-            this.buttonIdentify.Location = new System.Drawing.Point(53, 49);
-            this.buttonIdentify.Name = "buttonIdentify";
-            this.buttonIdentify.Size = new System.Drawing.Size(127, 40);
-            this.buttonIdentify.TabIndex = 0;
-            this.buttonIdentify.Text = "Identify Face";
-            this.buttonIdentify.UseVisualStyleBackColor = true;
-            this.buttonIdentify.Click += new System.EventHandler(this.ButtonIdentify_Click);
             // 
             // buttonAddFace
             // 
@@ -57,6 +44,7 @@
             this.buttonAddFace.TabIndex = 2;
             this.buttonAddFace.Text = "Add Face";
             this.buttonAddFace.UseVisualStyleBackColor = true;
+            this.buttonAddFace.Click += new System.EventHandler(this.buttonAddFace_Click);
             // 
             // imgCamUser
             // 
@@ -93,7 +81,6 @@
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.imgCamUser);
             this.Controls.Add(this.buttonAddFace);
-            this.Controls.Add(this.buttonIdentify);
             this.Name = "MainWindow";
             this.Text = "What\'s That?";
             this.Load += new System.EventHandler(this.MainWindow_Load);
@@ -104,8 +91,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button buttonIdentify;
         private System.Windows.Forms.Button buttonAddFace;
         private Emgu.CV.UI.ImageBox imgCamUser;
         private System.Windows.Forms.TextBox nameTextBox;

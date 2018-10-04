@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using System.IO;
 using Emgu.CV;
 using Emgu.CV.Structure;
+using Emgu.CV.UI;
 using System.Windows.Forms;
+using System.Drawing;
 
 /*
  * A basic face detection and recognition class
@@ -30,24 +32,96 @@ namespace What_s_That
         int _count, _numOfLabels, _t = 1;
         string _name, _names;
         MCvFont font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_TRIPLEX, 0.6d, 0.6d);
+        private ImageBox _cameraBox;
         #endregion
 
-        public Recognition()
+        public Recognition(ImageBox box)
         {
+            _cameraBox = box;
             _t = 1;
             // We're using only the frontal-face recognition
             _haarCascade = new HaarCascade("../../DLL/haarcascade_frontalface_default.xml");
             try
             {
-                string labelsPath = File.ReadAllText("../../Faces/Faces.txt");
-                MessageBox.Show(labelsPath);
+                string allLabels = File.ReadAllText("../../Faces/Faces.txt");
+                string[] text = allLabels.Split(',');
+                _numOfLabels = Convert.ToInt16(text[0]); //Contains the number of labels stored in DB
+                _count = _numOfLabels;
+                string facesLoad;
+                for (int i = 1; i < _numOfLabels; i++)
+                {
+                    facesLoad = "face" + i + ".bmp";
+                    _trainingImages.Add(new Image<Gray, byte>($"../../Faces/{facesLoad}"));
+                    _labels.Add(text[i]);
+                }
+                
             }
             catch (Exception ex)
             {
-
-                throw;
+                MessageBox.Show("Nothing in database");
             }
+
+            StartRecognition();
         }
 
+        public void StartRecognition()
+        {
+            _camera = new Capture();
+            _camera.QueryFrame();
+            Application.Idle += new EventHandler(FrameHandle);
+        }
+
+        private void FrameHandle(object sender, EventArgs e)
+        {
+            _users.Add("");
+            _frame = _camera.QueryFrame().Resize(320, 240, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
+            _grayFace = _frame.Convert<Gray, byte>();
+            MCvAvgComp[][] facesDetectedNow = _grayFace.DetectHaarCascade(_haarCascade, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
+            foreach (MCvAvgComp f in facesDetectedNow[0])
+            {
+                _result = _frame.Copy(f.rect).Convert<Gray, Byte>().Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
+                _frame.Draw(f.rect, new Bgr(Color.Red), 2);
+                if (_trainingImages.ToArray().Length != 0)
+                {
+                    MCvTermCriteria termCriterias = new MCvTermCriteria(_count, 0.001);
+                    EigenObjectRecognizer recognizer = new EigenObjectRecognizer(_trainingImages.ToArray(), _labels.ToArray(), 1500, ref termCriterias);
+                    _name = recognizer.Recognize(_result);
+                    _frame.Draw(_name, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.Green));
+
+                }
+                //users[t - 1] = name;
+                _users.Add("");
+            }
+            _cameraBox.Image = _frame;
+            _names = "";
+            _users.Clear();
+        }
+
+        public void AddFace(TextBox textBox)
+        {
+
+            _count = _count + 1;
+            _grayFace = _camera.QueryGrayFrame().Resize(320, 240, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
+            MCvAvgComp[][] detectedFaces = _grayFace.DetectHaarCascade(_haarCascade, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
+            foreach (MCvAvgComp f in detectedFaces[0])
+            {
+                _trainedFace = _frame.Copy(f.rect).Convert<Gray, byte>();
+                break;
+            }
+            _trainedFace = _result.Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
+            _trainingImages.Add(_trainedFace);
+            if (textBox.Text != "")
+            {
+                _labels.Add(textBox.Text);
+                File.WriteAllText("../../Faces/Faces.txt",
+                    _trainingImages.ToArray().Length.ToString() + ",");
+                for (int i = 1; i < _trainingImages.ToArray().Length + 1; i++)
+                {
+                    _trainingImages.ToArray()[i - 1].Save("../../Faces/face" + i + ".bmp");
+                    File.AppendAllText("../../Faces/Faces.txt", _labels.ToArray()[i - 1] + ",");
+                }
+                MessageBox.Show("Added successfully");
+            }
+        }
     }
 }
