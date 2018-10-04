@@ -34,7 +34,7 @@ namespace What_s_That
          */
         private void SetDllPath()
         {
-            string dllDirectory = @"../../DLL";
+            string dllDirectory = @"../../DLL"; // Regular expression?
             Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + dllDirectory);
         }
 

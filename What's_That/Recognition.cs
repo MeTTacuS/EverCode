@@ -20,39 +20,36 @@ namespace What_s_That
     class Recognition
     {
         #region Variables
-        HaarCascade _haarCascade; //Used for detecting faces
-        Capture _camera;
+        // Used for detecting faces
+        HaarCascade _haarCascadeFrontalFace; 
+        // Camera capture
+        Capture _camera; 
+        // Frame processing variables
         Image<Bgr, Byte> _frame;
         Image<Gray, byte> _result;
         Image<Gray, byte> _trainedFace = null;
         Image<Gray, byte> _grayFace = null;
+        // List of faces stored in the database
         List<Image<Gray, byte>> _trainingImages = new List<Image<Gray, byte>>();
+        // List of labels (names of faces)
         List<string> _labels = new List<string>();
-        List<string> _users = new List<string>();
         int _count, _numOfLabels;
         string _name;
+        // A font that is used for displaying the name
         MCvFont font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_TRIPLEX, 0.6d, 0.6d);
         private ImageBox _cameraBox;
         #endregion
 
-        public Recognition(ImageBox box)
+        public Recognition(ImageBox box) //Requires an ImageBox to be passed
         {
             _cameraBox = box;
-            //_t = 1;
-            _haarCascade = new HaarCascade("../../DLL/haarcascade_frontalface_default.xml");
+            // Path to them haarcascade xml file
+            _haarCascadeFrontalFace = new HaarCascade("../../DLL/haarcascade_frontalface_default.xml");
             try
             {
-                string allLabels = File.ReadAllText("../../Faces/Faces.txt");
-                string[] text = allLabels.Split(',');
-                _numOfLabels = Convert.ToInt16(text[0]); //Contains the number of labels stored in DB
-                _count = _numOfLabels;
-                string facesLoad;
-                for (int i = 1; i <= _numOfLabels; i++)
-                {
-                    facesLoad = "face" + i + ".bmp";
-                    _trainingImages.Add(new Image<Gray, byte>($"../../Faces/{facesLoad}"));
-                    _labels.Add(text[i]);
-                }
+                // Reading all image-names, the amount of them and loading those names AND pictures
+                //to our local variables. They will later be used for face recognition
+                ReadFiles();
             }
             catch (Exception)
             {
@@ -62,44 +59,63 @@ namespace What_s_That
             StartRecognition();
         }
 
+        private void ReadFiles()
+        {
+
+            string allLabels = File.ReadAllText("../../Faces/Faces.txt");
+            string[] text = allLabels.Split(',');
+            _numOfLabels = Convert.ToInt16(text[0]); //Contains the number of labels stored in DB
+            _count = _numOfLabels;
+            string facesLoad;
+            for (int i = 1; i <= _numOfLabels; i++)
+            {
+                facesLoad = "face" + i + ".bmp";
+                _trainingImages.Add(new Image<Gray, byte>($"../../Faces/{facesLoad}"));
+                _labels.Add(text[i]);
+            }
+        }
+
         public void StartRecognition()
         {
             _camera = new Capture();
             _camera.QueryFrame();
+            // Application.Idle is a WinForms thing. Basically method FrameHandle will be called 
+            //every frame that the program is running
             Application.Idle += new EventHandler(FrameHandle);
         }
 
         private void FrameHandle(object sender, EventArgs e)
         {
-            //_users.Add("");
+            // Getting current frame
             _frame = _camera.QueryFrame().Resize(320, 240, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
+            // Converting it into gray (used for recognition later)
             _grayFace = _frame.Convert<Gray, byte>();
-            MCvAvgComp[][] facesDetectedNow = _grayFace.DetectHaarCascade(_haarCascade, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
+
+            // A part where OpenCV tells apart the faces and draws a rectangle around it
+            MCvAvgComp[][] facesDetectedNow = _grayFace.DetectHaarCascade(_haarCascadeFrontalFace, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
             foreach (MCvAvgComp f in facesDetectedNow[0])
             {
                 _result = _frame.Copy(f.rect).Convert<Gray, Byte>().Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
+                // Draws a rectangle around the face
                 _frame.Draw(f.rect, new Bgr(Color.Red), 2);
+                // An IF that writes the name above the rectangle if there are 
+                //any potential matches in our image-database
                 if (_trainingImages.ToArray().Length != 0)
                 {
                     MCvTermCriteria termCriterias = new MCvTermCriteria(_count, 0.001);
                     EigenObjectRecognizer recognizer = new EigenObjectRecognizer(_trainingImages.ToArray(), _labels.ToArray(), 1500, ref termCriterias);
                     _name = recognizer.Recognize(_result);
                     _frame.Draw(_name, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.Green));
-
                 }
-                //_users[_t - 1] = _name;
-                //_users.Add("");
             }
             _cameraBox.Image = _frame;
-            //_names = "";
-            //_users.Clear();
         }
 
-        public void AddFace(TextBox textBox)
+        public void AddFace(TextBox textBox) // Requires a textbox that has the name in it
         {
             _count = _count + 1;
             _grayFace = _camera.QueryGrayFrame().Resize(320, 240, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
-            MCvAvgComp[][] detectedFaces = _grayFace.DetectHaarCascade(_haarCascade, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
+            MCvAvgComp[][] detectedFaces = _grayFace.DetectHaarCascade(_haarCascadeFrontalFace, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
             foreach (MCvAvgComp f in detectedFaces[0])
             {
                 _trainedFace = _frame.Copy(f.rect).Convert<Gray, byte>();
@@ -107,6 +123,7 @@ namespace What_s_That
             }
             _trainedFace = _result.Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
             _trainingImages.Add(_trainedFace);
+
             if (textBox.Text != "")
             {
                 _labels.Add(textBox.Text);
