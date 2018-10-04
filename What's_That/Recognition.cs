@@ -29,8 +29,8 @@ namespace What_s_That
         List<Image<Gray, byte>> _trainingImages = new List<Image<Gray, byte>>();
         List<string> _labels = new List<string>();
         List<string> _users = new List<string>();
-        int _count, _numOfLabels, _t;
-        string _name, _names;
+        int _count, _numOfLabels;
+        string _name;
         MCvFont font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_TRIPLEX, 0.6d, 0.6d);
         private ImageBox _cameraBox;
         #endregion
@@ -38,8 +38,7 @@ namespace What_s_That
         public Recognition(ImageBox box)
         {
             _cameraBox = box;
-            _t = 1;
-            // We're using only the frontal-face recognition
+            //_t = 1;
             _haarCascade = new HaarCascade("../../DLL/haarcascade_frontalface_default.xml");
             try
             {
@@ -48,15 +47,14 @@ namespace What_s_That
                 _numOfLabels = Convert.ToInt16(text[0]); //Contains the number of labels stored in DB
                 _count = _numOfLabels;
                 string facesLoad;
-                for (int i = 1; i < _numOfLabels; i++)
+                for (int i = 1; i <= _numOfLabels; i++)
                 {
                     facesLoad = "face" + i + ".bmp";
                     _trainingImages.Add(new Image<Gray, byte>($"../../Faces/{facesLoad}"));
                     _labels.Add(text[i]);
                 }
-                
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Nothing in database");
             }
@@ -73,7 +71,7 @@ namespace What_s_That
 
         private void FrameHandle(object sender, EventArgs e)
         {
-            _users.Add("");
+            //_users.Add("");
             _frame = _camera.QueryFrame().Resize(320, 240, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
             _grayFace = _frame.Convert<Gray, byte>();
             MCvAvgComp[][] facesDetectedNow = _grayFace.DetectHaarCascade(_haarCascade, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
@@ -89,17 +87,16 @@ namespace What_s_That
                     _frame.Draw(_name, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.Green));
 
                 }
-                //_users[t - 1] = name;
-                _users.Add("");
+                //_users[_t - 1] = _name;
+                //_users.Add("");
             }
             _cameraBox.Image = _frame;
-            _names = "";
-            _users.Clear();
+            //_names = "";
+            //_users.Clear();
         }
 
         public void AddFace(TextBox textBox)
         {
-
             _count = _count + 1;
             _grayFace = _camera.QueryGrayFrame().Resize(320, 240, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
             MCvAvgComp[][] detectedFaces = _grayFace.DetectHaarCascade(_haarCascade, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
