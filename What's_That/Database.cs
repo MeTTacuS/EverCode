@@ -25,7 +25,13 @@ namespace What_s_That
         public List<string> RetrieveData()
         {
             List<string> dataItems = new List<string>();
-            
+            string command = "SELECT * FROM names";
+            NpgsqlCommand cmd = new NpgsqlCommand(command, _conn);
+            NpgsqlDataReader reader = cmd.ExecuteReader();
+            for (int i = 0; reader.Read(); i++)
+            {
+                dataItems.Add(reader[0].ToString() + "," + reader[1].ToString() + Environment.NewLine);
+            }
             return dataItems;
         }
     }

@@ -26,6 +26,11 @@ namespace What_s_That
             rec = new Recognition(box : imgCamUser);
 
             database = new Database("127.0.0.1", "ned", "bulvianojas", "TestDatabase");
+            List<string> textFromDatabase = database.RetrieveData();
+            foreach (string text in textFromDatabase)
+            {
+                MessageBox.Show(text);
+            }
         }
 
         private void buttonAddFace_Click(object sender, EventArgs e)
