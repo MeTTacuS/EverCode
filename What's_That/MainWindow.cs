@@ -15,12 +15,17 @@ namespace What_s_That
     {
         #region Variables
         Recognition rec; //Face detection and recognition
+        Database database; //Requires host, username, password, database (all strings)
         #endregion
+
         public MainWindow()
         {
             SetDllPath();
             InitializeComponent();
+
             rec = new Recognition(box : imgCamUser);
+
+            database = new Database("127.0.0.1", "ned", "bulvianojas", "TestDatabase");
         }
 
         private void buttonAddFace_Click(object sender, EventArgs e)
