@@ -189,8 +189,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\whos that.png" />
-    <None Include="Resources\logo.jpg" />
-    <None Include="Resources\logo.bmp" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

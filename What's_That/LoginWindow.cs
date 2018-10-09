@@ -39,7 +39,10 @@ namespace What_s_That
             else
             {
                 //show default login error message 
-                MessageBox.Show("Login Error!");
+                username_TextBox.Text = "";
+                password_TextBox.Text = "";
+                incorrent_login_label.Text = "Neteisingai ivestas vardas arba slaptazodis";
+                //MessageBox.Show("Login Error!");
             }
            
         }
@@ -56,7 +59,7 @@ namespace What_s_That
 
         private void password_TextBox_TextChanged(object sender, EventArgs e)
         {
-            password_TextBox.PasswordChar = '#';
+            password_TextBox.PasswordChar = '*';
         }
 
         private void password_linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -67,6 +70,16 @@ namespace What_s_That
         private void register_linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             MessageBox.Show("Under development");
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
