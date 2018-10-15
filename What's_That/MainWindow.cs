@@ -42,5 +42,10 @@ namespace What_s_That
         {
 
         }
+
+        private void imgCamUser_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
