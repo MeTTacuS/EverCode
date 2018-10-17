@@ -100,7 +100,7 @@ namespace What_s_That
                     _name = recognizer.Recognize(_result);
                     if (_name != "")
                     {
-                        dp.DisplayImage(_labels, _name, _trainingImages);
+                        dp.DisplayUser(_labels, _name, _trainingImages);
                     }
                     _frame.Draw(_name, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.Green));
                 }

@@ -14,11 +14,6 @@ namespace What_s_That
     class Display
     {
 
-        private int _id;
-        private string _firstname;
-        private string _surname;
-        private int _age;
-
         ImageBox _imageBox;
         Label _nameLabel;
         Label _ageLabel;
@@ -28,19 +23,20 @@ namespace What_s_That
         public ImageBox ImageBox { get => _imageBox; set => _imageBox = value; }
 
 
-        public void DisplayImage(List<string> _labels, string _name, List<Image<Gray, byte>> _trainingImages)
+        public void DisplayUser(List<string> labels, string name, List<Image<Gray, byte>> trainingImages)
         {
             int i = 0;
-            foreach (string s in _labels)
+
+            foreach (string s in labels)
             {
-                if (s == _name)
+                if (s == name)
                     break;
                 i++;
             }
-            NameLabel.Text = _name;
-            _imageBox.Image = _trainingImages[i];
+            NameLabel.Text = name;
+            _imageBox.Image = trainingImages[i];
             if (_ageLabel != null)
-                _ageLabel.Text = _age.ToString();
+                _ageLabel.Text = "0";
         }
 
     }
