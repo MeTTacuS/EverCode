@@ -27,27 +27,13 @@ namespace What_s_That
         private bool StringValidator(string input)
         {
             string pattern = "[^a-zA-Z]";
-            if (Regex.IsMatch(input, pattern))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return Regex.IsMatch(input, pattern);
         }
         //validate integer 
         private bool IntegerValidator(string input)
         {
             string pattern = "[^0-9]";
-            if (Regex.IsMatch(input, pattern))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return Regex.IsMatch(input, pattern);
         }
         //clear user inputs 
         private void ClearTexts(string user, string pass)
@@ -63,7 +49,6 @@ namespace What_s_That
             {
                 MessageBox.Show("Enter the user name!");
                 return false;
-
             }
             //check user name is valid type 
             else if (StringValidator(user) == true)
