@@ -50,7 +50,7 @@ namespace What_s_That
             }
             catch (Exception)
             {
-                MessageBox.Show("Nothing in database");
+                // nothing in database was there
             }
 
             StartRecognition();
