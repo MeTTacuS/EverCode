@@ -53,7 +53,7 @@ namespace What_s_That
                 return false;
             }
 
-            else if (StringValidator(user) || IntegerValidator(pass))
+            else if (user.ContainsOnlyLetters() || pass.ContainsOnlyNumbers())
             {
                 MessageBox.Show("Incorrent format");
                 ClearTexts(user, pass);
