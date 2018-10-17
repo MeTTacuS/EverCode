@@ -23,11 +23,9 @@ namespace What_s_That
         private void loginButton_Click(object sender, EventArgs e)
         {
 
-            //define local variables from the user inputs 
             string user = username_TextBox.Text;
             string pass = password_TextBox.Text;
 
-            //check if eligible to be logged in 
             if (login.IsLoggedIn(user, pass))
             {
                 MessageBox.Show("You are logged in successfully");
@@ -38,11 +36,9 @@ namespace What_s_That
             }
             else
             {
-                //show default login error message 
                 username_TextBox.Text = "";
                 password_TextBox.Text = "";
                 incorrent_login_label.Text = "Neteisingai ivestas vardas arba slaptazodis";
-                //MessageBox.Show("Login Error!");
             }
            
         }

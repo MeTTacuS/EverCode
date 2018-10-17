@@ -145,7 +145,7 @@
             this.AcceptButton = this.loginButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.DimGray;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(398, 388);
             this.Controls.Add(this.incorrent_login_label);
             this.Controls.Add(this.register_linkLabel);
