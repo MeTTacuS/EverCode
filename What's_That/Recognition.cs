@@ -95,26 +95,10 @@ namespace What_s_That
                     MCvTermCriteria termCriterias = new MCvTermCriteria(_count, 0.001);
                     EigenObjectRecognizer recognizer = new EigenObjectRecognizer(_trainingImages.ToArray(), _labels.ToArray(), 1500, ref termCriterias);
                     _name = recognizer.Recognize(_result);
-                    if (_name != "")
-                    {
-                        DisplayImage();
-                    }
                     _frame.Draw(_name, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.Green));
                 }
             }
             _cameraBox.Image = _frame;
-        }
-
-        private void DisplayImage()
-        {
-            int i = 0;
-            foreach (string s in _labels)
-            {
-                if (s == _name)
-                    break;
-                i++;
-            }
-            _imageBox.Image = _trainingImages[i];
         }
 
         public void AddFace(TextBox textBox)
