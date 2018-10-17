@@ -17,8 +17,30 @@ using System.Drawing;
 
 namespace What_s_That
 {
+
     class Recognition
     {
+        #region Variables
+        // Used for detecting faces
+        HaarCascade _haarCascadeFrontalFace;
+        // Camera capture
+        Capture _camera;
+        // Frame processing variables
+        Image<Bgr, Byte> _frame;
+        Image<Gray, byte> _result;
+        Image<Gray, byte> _trainedFace = null;
+        Image<Gray, byte> _grayFace = null;
+        // List of faces stored in the database
+        List<Image<Gray, byte>> _trainingImages = new List<Image<Gray, byte>>();
+        // List of labels (names of faces)
+        List<string> _labels = new List<string>();
+        int _count, _numOfLabels;
+        string _name;
+        // A font that is used for displaying the name
+        MCvFont font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_TRIPLEX, 0.6d, 0.6d);
+        private ImageBox _cameraBox;
+        #endregion
+
         const string path = "../../DLL/haarcascade_frontalface_default.xml";
         const string txtPath = "../../Faces/Faces.txt";
 
@@ -109,7 +131,7 @@ namespace What_s_That
             if (textBox.Text != "")
             {
                 _labels.Add(textBox.Text);
-                File.WriteAllText(txtpath,
+                File.WriteAllText(txtPath,
                     _trainingImages.ToArray().Length.ToString() + ",");
                 for (int i = 1; i < _trainingImages.ToArray().Length + 1; i++)
                 {
