@@ -23,14 +23,14 @@ namespace What_s_That
             SetDllPath();
             InitializeComponent();
 
-            rec = new Recognition(box : imgCamUser);
+            rec = new Recognition(CameraBox : imgCamUser, ImageBox : FaceImageBox);
 
-            database = new Database("127.0.0.1", "ned", "evercode", "whatsthatdb");
-            List<string> textFromDatabase = database.RetrieveData();
-            foreach (string text in textFromDatabase)
-            {
-                MessageBox.Show(text);
-            }
+            //database = new Database("127.0.0.1", "ned", "evercode", "whatsthatdb");
+            //List<string> textFromDatabase = database.RetrieveData("labas");
+            //foreach (string text in textFromDatabase)
+            //{
+            //    MessageBox.Show(text);
+            //}
         }
 
         private void buttonAddFace_Click(object sender, EventArgs e)
@@ -57,5 +57,6 @@ namespace What_s_That
         {
 
         }
+        
     }
 }

@@ -37,11 +37,12 @@ namespace What_s_That
         const string txtPath = "../../Faces/Faces.txt";
         #endregion
 
+        ImageBox _imageBox;
 
-
-        public Recognition(ImageBox box)
+        public Recognition(ImageBox CameraBox, ImageBox ImageBox)
         {
-            _cameraBox = box;
+            _cameraBox = CameraBox;
+            _imageBox = ImageBox;
             _haarCascadeFrontalFace = new HaarCascade(path);
             try
             {
@@ -82,6 +83,7 @@ namespace What_s_That
         {
             _frame = _camera.QueryFrame().Resize(320, 240, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
             _grayFace = _frame.Convert<Gray, byte>();
+            
 
             MCvAvgComp[][] facesDetectedNow = _grayFace.DetectHaarCascade(_haarCascadeFrontalFace, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
             foreach (MCvAvgComp f in facesDetectedNow[0])
@@ -93,10 +95,26 @@ namespace What_s_That
                     MCvTermCriteria termCriterias = new MCvTermCriteria(_count, 0.001);
                     EigenObjectRecognizer recognizer = new EigenObjectRecognizer(_trainingImages.ToArray(), _labels.ToArray(), 1500, ref termCriterias);
                     _name = recognizer.Recognize(_result);
+                    if (_name != "")
+                    {
+                        DisplayImage();
+                    }
                     _frame.Draw(_name, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.Green));
                 }
             }
             _cameraBox.Image = _frame;
+        }
+
+        private void DisplayImage()
+        {
+            int i = 0;
+            foreach (string s in _labels)
+            {
+                if (s == _name)
+                    break;
+                i++;
+            }
+            _imageBox.Image = _trainingImages[i];
         }
 
         public void AddFace(TextBox textBox)
@@ -119,7 +137,7 @@ namespace What_s_That
                     _trainingImages.ToArray().Length.ToString() + ",");
                 for (int i = 1; i < _trainingImages.ToArray().Length + 1; i++)
                 {
-                    _trainingImages.ToArray()[i - 1].Save("../../Faces/face" + i + ".bmp");
+                    _trainingImages.ToArray()[i - 1].Save(txtPath + i + ".bmp");
                     File.AppendAllText(txtPath, _labels.ToArray()[i - 1] + ",");
                 }
                 MessageBox.Show("Added successfully");
