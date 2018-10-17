@@ -137,7 +137,7 @@ namespace What_s_That
                     _trainingImages.ToArray().Length.ToString() + ",");
                 for (int i = 1; i < _trainingImages.ToArray().Length + 1; i++)
                 {
-                    _trainingImages.ToArray()[i - 1].Save(txtPath + i + ".bmp");
+                    _trainingImages.ToArray()[i - 1].Save($"../../Faces/Face" + i + ".bmp");
                     File.AppendAllText(txtPath, _labels.ToArray()[i - 1] + ",");
                 }
                 MessageBox.Show("Added successfully");
