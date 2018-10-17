@@ -56,7 +56,7 @@
             this.imgCamUser.Size = new System.Drawing.Size(448, 338);
             this.imgCamUser.TabIndex = 2;
             this.imgCamUser.TabStop = false;
-            this.imgCamUser.Click += new System.EventHandler(this.imgCamUser_Click);
+            this.imgCamUser.Click += new System.EventHandler(this.ImgCamUser_Click);
             // 
             // nameTextBox
             // 

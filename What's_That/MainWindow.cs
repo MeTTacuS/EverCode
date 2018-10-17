@@ -34,7 +34,7 @@ namespace What_s_That
          */
         private void SetDllPath()
         {
-            string dllDirectory = @"../../DLL"; // Regular expression?
+            string dllDirectory = @"../../DLL";
             Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + dllDirectory);
         }
 
@@ -43,7 +43,7 @@ namespace What_s_That
 
         }
 
-        private void imgCamUser_Click(object sender, EventArgs e)
+        private void ImgCamUser_Click(object sender, EventArgs e)
         {
 
         }
