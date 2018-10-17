@@ -16,7 +16,7 @@ namespace What_s_That
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainWindow());
+            Application.Run(new LoginWindow());
         }
     }
 }

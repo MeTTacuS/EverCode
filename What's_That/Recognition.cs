@@ -19,32 +19,14 @@ namespace What_s_That
 {
     class Recognition
     {
-        #region Variables
-        // Used for detecting faces
-        HaarCascade _haarCascadeFrontalFace; 
-        // Camera capture
-        Capture _camera; 
-        // Frame processing variables
-        Image<Bgr, Byte> _frame;
-        Image<Gray, byte> _result;
-        Image<Gray, byte> _trainedFace = null;
-        Image<Gray, byte> _grayFace = null;
-        // List of faces stored in the database
-        List<Image<Gray, byte>> _trainingImages = new List<Image<Gray, byte>>();
-        // List of labels (names of faces)
-        List<string> _labels = new List<string>();
-        int _count, _numOfLabels;
-        string _name;
-        // A font that is used for displaying the name
-        MCvFont font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_TRIPLEX, 0.6d, 0.6d);
-        private ImageBox _cameraBox;
-        #endregion
+        const string path = "../../DLL/haarcascade_frontalface_default.xml";
+        const string txtPath = "../../Faces/Faces.txt";
 
         public Recognition(ImageBox box) //Requires an ImageBox to be passed
         {
             _cameraBox = box;
             // Path to them haarcascade xml file
-            _haarCascadeFrontalFace = new HaarCascade("../../DLL/haarcascade_frontalface_default.xml");
+            _haarCascadeFrontalFace = new HaarCascade(path);
             try
             {
                 // Reading all image-names, the amount of them and loading those names AND pictures
@@ -62,7 +44,7 @@ namespace What_s_That
         private void ReadFiles()
         {
 
-            string allLabels = File.ReadAllText("../../Faces/Faces.txt");
+            string allLabels = File.ReadAllText(txtPath);
             string[] text = allLabels.Split(',');
             _numOfLabels = Convert.ToInt16(text[0]); //Contains the number of labels stored in DB
             _count = _numOfLabels;
@@ -127,12 +109,12 @@ namespace What_s_That
             if (textBox.Text != "")
             {
                 _labels.Add(textBox.Text);
-                File.WriteAllText("../../Faces/Faces.txt",
+                File.WriteAllText(txtpath,
                     _trainingImages.ToArray().Length.ToString() + ",");
                 for (int i = 1; i < _trainingImages.ToArray().Length + 1; i++)
                 {
                     _trainingImages.ToArray()[i - 1].Save("../../Faces/face" + i + ".bmp");
-                    File.AppendAllText("../../Faces/Faces.txt", _labels.ToArray()[i - 1] + ",");
+                    File.AppendAllText(txtPath, _labels.ToArray()[i - 1] + ",");
                 }
                 MessageBox.Show("Added successfully");
             }
