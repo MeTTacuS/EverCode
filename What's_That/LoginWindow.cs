@@ -47,11 +47,6 @@ namespace What_s_That
            
         }
 
-        private void LoginWindow_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void username_TextBox_TextChanged(object sender, EventArgs e)
         {
 
@@ -78,6 +73,11 @@ namespace What_s_That
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LoginWindow_Load(object sender, EventArgs e)
         {
 
         }
