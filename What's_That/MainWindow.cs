@@ -25,7 +25,7 @@ namespace What_s_That
 
             rec = new Recognition(box : imgCamUser);
 
-            database = new Database("127.0.0.1", "ned", "bulvianojas", "TestDatabase");
+            database = new Database("127.0.0.1", "ned", "evercode", "whatsthatdb");
             List<string> textFromDatabase = database.RetrieveData();
             foreach (string text in textFromDatabase)
             {

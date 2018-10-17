@@ -22,10 +22,10 @@ namespace What_s_That
             _conn.Open();
         }
 
-        public List<string> RetrieveData()
+        public List<string> RetrieveData(string command)
         {
             List<string> dataItems = new List<string>();
-            string command = "SELECT * FROM names";
+            command = "SELECT * FROM userdata";
             NpgsqlCommand cmd = new NpgsqlCommand(command, _conn);
             NpgsqlDataReader reader = cmd.ExecuteReader();
             for (int i = 0; reader.Read(); i++)
