@@ -34,15 +34,18 @@
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.FaceImageBox = new Emgu.CV.UI.ImageBox();
+            this.FirstName = new System.Windows.Forms.Label();
+            this.Age = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.imgCamUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FaceImageBox)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonAddFace
             // 
-            this.buttonAddFace.Location = new System.Drawing.Point(53, 239);
+            this.buttonAddFace.Location = new System.Drawing.Point(71, 294);
+            this.buttonAddFace.Margin = new System.Windows.Forms.Padding(4);
             this.buttonAddFace.Name = "buttonAddFace";
-            this.buttonAddFace.Size = new System.Drawing.Size(127, 21);
+            this.buttonAddFace.Size = new System.Drawing.Size(169, 26);
             this.buttonAddFace.TabIndex = 2;
             this.buttonAddFace.Text = "Add Face";
             this.buttonAddFace.UseVisualStyleBackColor = true;
@@ -51,49 +54,75 @@
             // imgCamUser
             // 
             this.imgCamUser.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.imgCamUser.Location = new System.Drawing.Point(213, 12);
+            this.imgCamUser.Location = new System.Drawing.Point(284, 15);
+            this.imgCamUser.Margin = new System.Windows.Forms.Padding(4);
             this.imgCamUser.Name = "imgCamUser";
-            this.imgCamUser.Size = new System.Drawing.Size(336, 275);
+            this.imgCamUser.Size = new System.Drawing.Size(448, 338);
             this.imgCamUser.TabIndex = 2;
             this.imgCamUser.TabStop = false;
             this.imgCamUser.Click += new System.EventHandler(this.ImgCamUser_Click);
             // 
             // nameTextBox
             // 
-            this.nameTextBox.Location = new System.Drawing.Point(91, 213);
+            this.nameTextBox.Location = new System.Drawing.Point(121, 262);
+            this.nameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(89, 20);
+            this.nameTextBox.Size = new System.Drawing.Size(117, 22);
             this.nameTextBox.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(50, 216);
+            this.label1.Location = new System.Drawing.Point(67, 266);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.Size = new System.Drawing.Size(45, 17);
             this.label1.TabIndex = 4;
             this.label1.Text = "Name";
             // 
             // FaceImageBox
             // 
-            this.FaceImageBox.Location = new System.Drawing.Point(38, 32);
+            this.FaceImageBox.Location = new System.Drawing.Point(70, 120);
+            this.FaceImageBox.Margin = new System.Windows.Forms.Padding(4);
             this.FaceImageBox.Name = "FaceImageBox";
             this.FaceImageBox.Size = new System.Drawing.Size(123, 111);
             this.FaceImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.FaceImageBox.TabIndex = 2;
             this.FaceImageBox.TabStop = false;
             // 
+            // FirstName
+            // 
+            this.FirstName.AccessibleDescription = "";
+            this.FirstName.AccessibleName = "";
+            this.FirstName.AutoSize = true;
+            this.FirstName.Location = new System.Drawing.Point(68, 36);
+            this.FirstName.Name = "FirstName";
+            this.FirstName.Size = new System.Drawing.Size(0, 17);
+            this.FirstName.TabIndex = 5;
+            // 
+            // Age
+            // 
+            this.Age.AccessibleName = "";
+            this.Age.AutoSize = true;
+            this.Age.Location = new System.Drawing.Point(68, 77);
+            this.Age.Name = "Age";
+            this.Age.Size = new System.Drawing.Size(0, 17);
+            this.Age.TabIndex = 6;
+            // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(561, 311);
+            this.ClientSize = new System.Drawing.Size(748, 383);
+            this.Controls.Add(this.Age);
+            this.Controls.Add(this.FirstName);
             this.Controls.Add(this.FaceImageBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.imgCamUser);
             this.Controls.Add(this.buttonAddFace);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainWindow";
             this.Text = "What\'s That?";
             this.Load += new System.EventHandler(this.MainWindow_Load);
@@ -110,6 +139,8 @@
         private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.Label label1;
         private Emgu.CV.UI.ImageBox FaceImageBox;
+        private System.Windows.Forms.Label FirstName;
+        private System.Windows.Forms.Label Age;
     }
 }
 

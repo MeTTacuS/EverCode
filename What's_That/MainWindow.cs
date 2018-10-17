@@ -23,7 +23,7 @@ namespace What_s_That
             SetDllPath();
             InitializeComponent();
 
-            rec = new Recognition(CameraBox : imgCamUser, ImageBox : FaceImageBox);
+            rec = new Recognition(CameraBox : imgCamUser, ImageBox : FaceImageBox, NameLable: FirstName, AgeLabel: Age);
 
             //database = new Database("127.0.0.1", "ned", "evercode", "whatsthatdb");
             //List<string> textFromDatabase = database.RetrieveData("labas");
@@ -57,6 +57,7 @@ namespace What_s_That
         {
 
         }
-        
+
+      
     }
 }
