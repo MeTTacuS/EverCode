@@ -15,12 +15,23 @@ namespace What_s_That
     {
         #region Variables
         Recognition rec; //Face detection and recognition
+        Database database; //Requires host, username, password, database (all strings)
         #endregion
+
         public MainWindow()
         {
             SetDllPath();
             InitializeComponent();
-            rec = new Recognition(box : imgCamUser);
+
+            rec = new Recognition(CameraBox : imgCamUser, ImageBox : FaceImageBox);
+            database = new Database("127.0.0.1", "ned", "evercode", "whatsthatdb");
+
+            //database.InsertData(100001, "nedas", "valentinovicius", 20);
+            //List<string> textFromDatabase = database.RetrieveData("SELECT * FROM userdata");
+            //foreach (string text in textFromDatabase)
+            //{
+            //    MessageBox.Show(text);
+            //}
         }
 
         private void buttonAddFace_Click(object sender, EventArgs e)
@@ -47,5 +58,6 @@ namespace What_s_That
         {
 
         }
+        
     }
 }
