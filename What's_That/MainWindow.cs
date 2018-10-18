@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Emgu.CV.UI;
 
 namespace What_s_That
 {
@@ -16,11 +8,13 @@ namespace What_s_That
         #region Variables
         Recognition rec; //Face detection and recognition
         #endregion
+
         public MainWindow()
         {
             SetDllPath();
             InitializeComponent();
-            rec = new Recognition(box : imgCamUser);
+
+            rec = new Recognition(CameraBox : imgCamUser, ImageBox : FaceImageBox, NameLable: FirstName, AgeLabel: Age);
         }
 
         private void buttonAddFace_Click(object sender, EventArgs e)
@@ -44,6 +38,21 @@ namespace What_s_That
         }
 
         private void ImgCamUser_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
         {
 
         }

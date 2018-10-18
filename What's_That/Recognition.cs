@@ -31,17 +31,21 @@ namespace What_s_That
         List<string> _labels = new List<string>();
         int _count, _numOfLabels;
         string _name;
+        int _age;
         MCvFont font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_TRIPLEX, 0.6d, 0.6d);
         private ImageBox _cameraBox;
         const string path = "../../DLL/haarcascade_frontalface_default.xml";
         const string txtPath = "../../Faces/Faces.txt";
         #endregion
 
+        Display dp = new Display();
 
-
-        public Recognition(ImageBox box)
+        public Recognition(ImageBox CameraBox, ImageBox ImageBox, Label NameLable, Label AgeLabel=null)
         {
-            _cameraBox = box;
+            _cameraBox = CameraBox;
+            dp.ImageBox = ImageBox;
+            dp.NameLabel = NameLable;
+            dp.AgeLabel = AgeLabel;
             _haarCascadeFrontalFace = new HaarCascade(path);
             try
             {
@@ -49,7 +53,7 @@ namespace What_s_That
             }
             catch (Exception)
             {
-                MessageBox.Show("Nothing in database");
+                // nothing in database was there
             }
 
             StartRecognition();
@@ -82,6 +86,7 @@ namespace What_s_That
         {
             _frame = _camera.QueryFrame().Resize(320, 240, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
             _grayFace = _frame.Convert<Gray, byte>();
+            
 
             MCvAvgComp[][] facesDetectedNow = _grayFace.DetectHaarCascade(_haarCascadeFrontalFace, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
             foreach (MCvAvgComp f in facesDetectedNow[0])
@@ -93,6 +98,10 @@ namespace What_s_That
                     MCvTermCriteria termCriterias = new MCvTermCriteria(_count, 0.001);
                     EigenObjectRecognizer recognizer = new EigenObjectRecognizer(_trainingImages.ToArray(), _labels.ToArray(), 1500, ref termCriterias);
                     _name = recognizer.Recognize(_result);
+                    if (_name != "") // Call to a data-display class
+                    {
+                        dp.DisplayUser(_labels, _name, _trainingImages);
+                    }
                     _frame.Draw(_name, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.Green));
                 }
             }
@@ -109,20 +118,27 @@ namespace What_s_That
                 _trainedFace = _frame.Copy(f.rect).Convert<Gray, byte>();
                 break;
             }
-            _trainedFace = _result.Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
-            _trainingImages.Add(_trainedFace);
-
-            if (textBox.Text != "")
+            try
             {
-                _labels.Add(textBox.Text);
-                File.WriteAllText(txtPath,
-                    _trainingImages.ToArray().Length.ToString() + ",");
-                for (int i = 1; i < _trainingImages.ToArray().Length + 1; i++)
+                _trainedFace = _result.Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
+                _trainingImages.Add(_trainedFace);
+
+                if (textBox.Text != "")
                 {
-                    _trainingImages.ToArray()[i - 1].Save("../../Faces/face" + i + ".bmp");
-                    File.AppendAllText(txtPath, _labels.ToArray()[i - 1] + ",");
+                    _labels.Add(textBox.Text);
+                    File.WriteAllText(txtPath,
+                        _trainingImages.ToArray().Length.ToString() + ",");
+                    for (int i = 1; i < _trainingImages.ToArray().Length + 1; i++)
+                    {
+                        _trainingImages.ToArray()[i - 1].Save($"../../Faces/Face" + i + ".bmp");
+                        File.AppendAllText(txtPath, _labels.ToArray()[i - 1] + ",");
+                    }
+                    MessageBox.Show("Added successfully");
                 }
-                MessageBox.Show("Added successfully");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No face was found");
             }
         }
     }
