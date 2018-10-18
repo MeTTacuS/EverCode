@@ -13,84 +13,62 @@ namespace What_s_That
 {
     class Login
     {
-        //decalre properties 
-        public string Username { get; set; }
-        public string Userpassword { get; set; }
+        public string Username { get; private set; }
+        public string Userpassword { get; private set; }
 
-        //intialise  
         public Login(string user, string pass)
         {
-            this.Username = user;
-            this.Userpassword = pass;
+            Username = user;
+            Userpassword = pass;
         }
-        //validate string 
+
         private bool StringValidator(string input)
         {
             string pattern = "[^a-zA-Z]";
             return Regex.IsMatch(input, pattern);
         }
-        //validate integer 
+
         private bool IntegerValidator(string input)
         {
             string pattern = "[^0-9]";
             return Regex.IsMatch(input, pattern);
         }
-        //clear user inputs 
+
         private void ClearTexts(string user, string pass)
         {
             user = String.Empty;
             pass = String.Empty;
         }
-        //method to check if eligible to be logged in 
+
         internal bool IsLoggedIn(string user, string pass)
         {
-            //check user name empty 
             if (string.IsNullOrEmpty(user))
             {
                 MessageBox.Show("Enter the user name!");
                 return false;
             }
-            //check user name is valid type 
-            else if (StringValidator(user) == true)
+            else if (string.IsNullOrEmpty(pass))
             {
-                MessageBox.Show("Enter only text here");
+                MessageBox.Show("Enter the passowrd!");
+                return false;
+            }
+
+            else if (user.ContainsOnlyLetters() || pass.ContainsOnlyNumbers())
+            {
+                MessageBox.Show("Incorrent format");
                 ClearTexts(user, pass);
                 return false;
             }
-            //check user name is correct 
+
+            else if (Username != user || Userpassword != pass)
+            {
+                MessageBox.Show("Username or password is incorrect!");
+                ClearTexts(user, pass);
+                return false;
+            }
             else
             {
-                if (Username != user)
-                {
-                    MessageBox.Show("User name is incorrect!");
-                    ClearTexts(user, pass);
-                    return false;
-                }
-                //check password is empty 
-                else
-                {
-                    if (string.IsNullOrEmpty(pass))
-                    {
-                        MessageBox.Show("Enter the passowrd!");
-                        return false;
-                    }
-                    //check password is valid 
-                    else if (IntegerValidator(pass) == true)
-                    {
-                        MessageBox.Show("Enter only integer here");
-                        return false;
-                    }
-                    //check password is correct 
-                    else if (Userpassword != pass)
-                    {
-                        MessageBox.Show("Password is incorrect");
-                        return false;
-                    }
-                    else
-                    {
-                        return true;
-                    }
-                }
+                return true;
             }
         }
     }
