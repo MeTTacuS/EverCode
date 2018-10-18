@@ -11,8 +11,24 @@ using System.Windows.Forms;
 
 namespace What_s_That
 {
+
     class Login
     {
+        [FlagsAttribute]
+        private enum LoginValidation
+        {
+            entered = 1,
+            valide = 2,
+            correct = 4,
+
+            empty = 8,
+            invalide = 16,
+            incorrect = 32
+        }
+
+        string userpattern = "^[A-Za-z]{3,}$";
+        string passpattern = "^[0-9]{6,}$";
+
         public string Username { get; private set; }
         public string Userpassword { get; private set; }
 
@@ -22,48 +38,29 @@ namespace What_s_That
             Userpassword = pass;
         }
 
-        private bool StringValidator(string input)
+        private int IsEmpty(string value)
         {
-            string pattern = "[^a-zA-Z]";
-            return Regex.IsMatch(input, pattern);
+            return string.IsNullOrEmpty(value) ? 8 : 1;
         }
 
-        private bool IntegerValidator(string input)
+        private int IsValide(string input, string pattern)
         {
-            string pattern = "[^0-9]";
-            return Regex.IsMatch(input, pattern);
+            return Regex.IsMatch(input, pattern) ? 2 : 16;
         }
 
-        private void ClearTexts(string user, string pass)
+        private int IsCorrect(string loginname, string username)
         {
-            user = String.Empty;
-            pass = String.Empty;
+            return loginname == username ? 4 : 32;
         }
 
         internal bool IsLoggedIn(string user, string pass)
         {
-            if (string.IsNullOrEmpty(user))
-            {
-                MessageBox.Show("Enter the user name!");
-                return false;
-            }
-            else if (string.IsNullOrEmpty(pass))
-            {
-                MessageBox.Show("Enter the passowrd!");
-                return false;
-            }
+            int username = IsEmpty(user) | IsValide(user, userpattern) | IsCorrect(Username, user);
+            int password = IsEmpty(pass) | IsValide(pass, passpattern) | IsCorrect(Userpassword, pass);
 
-            else if (StringValidator(user) || IntegerValidator(pass))
+            if(username > 7 || password > 7)
             {
-                MessageBox.Show("Incorrent format");
-                ClearTexts(user, pass);
-                return false;
-            }
-
-            else if (Username != user || Userpassword != pass)
-            {
-                MessageBox.Show("Username or password is incorrect!");
-                ClearTexts(user, pass);
+                MessageBox.Show(string.Format("username: {0} \n password: {1}", (LoginValidation)username, (LoginValidation)password));
                 return false;
             }
             else
