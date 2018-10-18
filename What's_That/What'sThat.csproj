@@ -86,9 +86,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Recognition.cs" />
     <Compile Include="PersonData.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Recognition.cs" />
     <Compile Include="StringExtensions.cs" />
     <EmbeddedResource Include="LoginWindow.resx">
       <DependentUpon>LoginWindow.cs</DependentUpon>
