@@ -53,7 +53,7 @@ namespace What_s_That
             }
             catch (Exception)
             {
-                MessageBox.Show("Nothing in database");
+                // nothing in database was there
             }
 
             StartRecognition();
@@ -98,16 +98,11 @@ namespace What_s_That
                     MCvTermCriteria termCriterias = new MCvTermCriteria(_count, 0.001);
                     EigenObjectRecognizer recognizer = new EigenObjectRecognizer(_trainingImages.ToArray(), _labels.ToArray(), 1500, ref termCriterias);
                     _name = recognizer.Recognize(_result);
-                    if (_name != "")
-                    {
-                        dp.DisplayUser(_labels, _name, _trainingImages);
-                    }
                     _frame.Draw(_name, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.Green));
                 }
             }
             _cameraBox.Image = _frame;
         }
-
 
         public void AddFace(TextBox textBox)
         {
@@ -129,7 +124,7 @@ namespace What_s_That
                     _trainingImages.ToArray().Length.ToString() + ",");
                 for (int i = 1; i < _trainingImages.ToArray().Length + 1; i++)
                 {
-                    _trainingImages.ToArray()[i - 1].Save(txtPath + i + ".bmp");
+                    _trainingImages.ToArray()[i - 1].Save($"../../Faces/Face" + i + ".bmp");
                     File.AppendAllText(txtPath, _labels.ToArray()[i - 1] + ",");
                 }
                 MessageBox.Show("Added successfully");
