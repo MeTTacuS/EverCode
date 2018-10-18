@@ -31,18 +31,21 @@ namespace What_s_That
         List<string> _labels = new List<string>();
         int _count, _numOfLabels;
         string _name;
+        int _age;
         MCvFont font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_TRIPLEX, 0.6d, 0.6d);
         private ImageBox _cameraBox;
         const string path = "../../DLL/haarcascade_frontalface_default.xml";
         const string txtPath = "../../Faces/Faces.txt";
         #endregion
 
-        ImageBox _imageBox;
+        Display dp = new Display();
 
-        public Recognition(ImageBox CameraBox, ImageBox ImageBox)
+        public Recognition(ImageBox CameraBox, ImageBox ImageBox, Label NameLable, Label AgeLabel=null)
         {
             _cameraBox = CameraBox;
-            _imageBox = ImageBox;
+            dp.ImageBox = ImageBox;
+            dp.NameLabel = NameLable;
+            dp.AgeLabel = AgeLabel;
             _haarCascadeFrontalFace = new HaarCascade(path);
             try
             {

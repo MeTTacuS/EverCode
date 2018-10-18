@@ -23,8 +23,8 @@ namespace What_s_That
             SetDllPath();
             InitializeComponent();
 
-            rec = new Recognition(CameraBox : imgCamUser, ImageBox : FaceImageBox);
-            database = new Database("127.0.0.1", "ned", "evercode", "whatsthatdb");
+            rec = new Recognition(CameraBox : imgCamUser, ImageBox : FaceImageBox, NameLable: FirstName, AgeLabel: Age);
+            //database = new Database("127.0.0.1", "ned", "evercode", "whatsthatdb");
 
             //database.InsertData(100001, "nedas", "valentinovicius", 20);
             //List<string> textFromDatabase = database.RetrieveData("SELECT * FROM userdata");
