@@ -114,21 +114,31 @@ namespace What_s_That
                 _trainedFace = _frame.Copy(f.rect).Convert<Gray, byte>();
                 break;
             }
-            _trainedFace = _result.Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
-            _trainingImages.Add(_trainedFace);
-
-            if (textBox.Text != "")
+            try
             {
-                _labels.Add(textBox.Text);
-                File.WriteAllText(txtPath,
-                    _trainingImages.ToArray().Length.ToString() + ",");
-                for (int i = 1; i < _trainingImages.ToArray().Length + 1; i++)
+                _trainedFace = _result.Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
+                _trainingImages.Add(_trainedFace);
+
+                if (textBox.Text != "")
                 {
-                    _trainingImages.ToArray()[i - 1].Save($"../../Faces/Face" + i + ".bmp");
-                    File.AppendAllText(txtPath, _labels.ToArray()[i - 1] + ",");
+                    _labels.Add(textBox.Text);
+                    File.WriteAllText(txtPath,
+                        _trainingImages.ToArray().Length.ToString() + ",");
+                    for (int i = 1; i < _trainingImages.ToArray().Length + 1; i++)
+                    {
+                        _trainingImages.ToArray()[i - 1].Save($"../../Faces/Face" + i + ".bmp");
+                        File.AppendAllText(txtPath, _labels.ToArray()[i - 1] + ",");
+                    }
+                    MessageBox.Show("Added successfully");
                 }
-                MessageBox.Show("Added successfully");
             }
+            catch (Exception)
+            {
+                MessageBox.Show("No face was found");
+            }
+
+
+            
         }
     }
 }
