@@ -39,10 +39,10 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.idTextBox = new System.Windows.Forms.TextBox();
-            this.IDLabel = new System.Windows.Forms.Label();
-            this.ageTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.ageTextBox = new System.Windows.Forms.TextBox();
+            this.IDLabel = new System.Windows.Forms.Label();
+            this.idTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.imgCamUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FaceImageBox)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -52,7 +52,7 @@
             // 
             // buttonAddFace
             // 
-            this.buttonAddFace.Location = new System.Drawing.Point(33, 203);
+            this.buttonAddFace.Location = new System.Drawing.Point(33, 151);
             this.buttonAddFace.Name = "buttonAddFace";
             this.buttonAddFace.Size = new System.Drawing.Size(127, 21);
             this.buttonAddFace.TabIndex = 2;
@@ -72,7 +72,7 @@
             // 
             // nameTextBox
             // 
-            this.nameTextBox.Location = new System.Drawing.Point(71, 119);
+            this.nameTextBox.Location = new System.Drawing.Point(71, 81);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(89, 20);
             this.nameTextBox.TabIndex = 3;
@@ -80,7 +80,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(30, 122);
+            this.label1.Location = new System.Drawing.Point(30, 84);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 4;
@@ -122,7 +122,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(2, 1);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(206, 286);
@@ -134,13 +134,14 @@
             this.tabPage1.Controls.Add(this.FaceImageBox);
             this.tabPage1.Controls.Add(this.Age);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage1.Size = new System.Drawing.Size(198, 260);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Information";
             this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // tabPage2
             // 
@@ -152,46 +153,46 @@
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.nameTextBox);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage2.Size = new System.Drawing.Size(198, 260);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Add";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // idTextBox
+            // label2
             // 
-            this.idTextBox.Location = new System.Drawing.Point(71, 93);
-            this.idTextBox.Name = "idTextBox";
-            this.idTextBox.Size = new System.Drawing.Size(89, 20);
-            this.idTextBox.TabIndex = 5;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(30, 110);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(26, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Age";
+            // 
+            // ageTextBox
+            // 
+            this.ageTextBox.Location = new System.Drawing.Point(71, 107);
+            this.ageTextBox.Name = "ageTextBox";
+            this.ageTextBox.Size = new System.Drawing.Size(89, 20);
+            this.ageTextBox.TabIndex = 7;
             // 
             // IDLabel
             // 
             this.IDLabel.AutoSize = true;
-            this.IDLabel.Location = new System.Drawing.Point(30, 96);
+            this.IDLabel.Location = new System.Drawing.Point(30, 58);
             this.IDLabel.Name = "IDLabel";
             this.IDLabel.Size = new System.Drawing.Size(18, 13);
             this.IDLabel.TabIndex = 6;
             this.IDLabel.Text = "ID";
             this.IDLabel.Click += new System.EventHandler(this.label2_Click);
             // 
-            // ageTextBox
+            // idTextBox
             // 
-            this.ageTextBox.Location = new System.Drawing.Point(71, 145);
-            this.ageTextBox.Name = "ageTextBox";
-            this.ageTextBox.Size = new System.Drawing.Size(89, 20);
-            this.ageTextBox.TabIndex = 7;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(30, 148);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(26, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Age";
+            this.idTextBox.Location = new System.Drawing.Point(71, 55);
+            this.idTextBox.Name = "idTextBox";
+            this.idTextBox.Size = new System.Drawing.Size(89, 20);
+            this.idTextBox.TabIndex = 5;
             // 
             // MainWindow
             // 

@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Emgu.CV.UI;
 
 namespace What_s_That
 {
@@ -15,7 +7,6 @@ namespace What_s_That
     {
         #region Variables
         Recognition rec; //Face detection and recognition
-        Database database; //Requires host, username, password, database (all strings)
         #endregion
 
         public MainWindow()
@@ -24,14 +15,6 @@ namespace What_s_That
             InitializeComponent();
 
             rec = new Recognition(CameraBox : imgCamUser, ImageBox : FaceImageBox, NameLable: FirstName, AgeLabel: Age);
-            //database = new Database("127.0.0.1", "ned", "evercode", "whatsthatdb");
-
-            //database.InsertData(100001, "nedas", "valentinovicius", 20);
-            //List<string> textFromDatabase = database.RetrieveData("SELECT * FROM userdata");
-            //foreach (string text in textFromDatabase)
-            //{
-            //    MessageBox.Show(text);
-            //}
         }
 
         private void buttonAddFace_Click(object sender, EventArgs e)
@@ -65,6 +48,11 @@ namespace What_s_That
         }
 
         private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
         {
 
         }

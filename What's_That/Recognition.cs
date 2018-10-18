@@ -98,6 +98,10 @@ namespace What_s_That
                     MCvTermCriteria termCriterias = new MCvTermCriteria(_count, 0.001);
                     EigenObjectRecognizer recognizer = new EigenObjectRecognizer(_trainingImages.ToArray(), _labels.ToArray(), 1500, ref termCriterias);
                     _name = recognizer.Recognize(_result);
+                    if (_name != "") // Call to a data-display class
+                    {
+                        dp.DisplayUser(_labels, _name, _trainingImages);
+                    }
                     _frame.Draw(_name, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.Green));
                 }
             }
@@ -136,9 +140,6 @@ namespace What_s_That
             {
                 MessageBox.Show("No face was found");
             }
-
-
-            
         }
     }
 }
