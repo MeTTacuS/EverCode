@@ -12,11 +12,13 @@ namespace WTService.Controllers
     public class ValuesController : ApiController
     {
 
-        Person[] person = new Person[]
+        Person[] tmp = new Person[]
         {
             new Person{id=1, Name= "domas", image = new Bitmap ($"../../Faces/Faces.txt4.bmp", true)},
             new Person{id=2, Name="migle"}
         };
+
+        List<Person> person = tmp.ToList();
 
 
 
@@ -38,8 +40,9 @@ namespace WTService.Controllers
         }
 
         // POST api/values
-        public void Post([FromBody]string value)
+        public void Post([FromBody]Person p)
         {
+            person.Add(new Person { id = p.id, Name = p.Name, image = p.image });
         }
 
         // PUT api/values/5

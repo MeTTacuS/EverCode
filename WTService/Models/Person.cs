@@ -8,8 +8,8 @@ namespace WTService.Models
 {
     public class Person
     {
-        public int id;
-        public string Name;
-        public Bitmap image;
+        public int id { get; set; }
+        public string Name { get; set; }
+        public Bitmap image { get; set; }
     }
 }
