@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -78,8 +79,6 @@ namespace What_s_That
             foreach (MCvAvgComp f in facesDetectedNow[0])
             {
                 _result = _frame.Copy(f.rect).Convert<Gray, Byte>().Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
-                // Draws a rectangle around the face
-                _frame.Draw(f.rect, new Bgr(Color.Red), 2);
                 // An IF that writes the name above the rectangle if there are 
                 //any potential matches in our image-database
                 if (_trainingImages.ToArray().Length != 0)
@@ -87,10 +86,9 @@ namespace What_s_That
                     MCvTermCriteria termCriterias = new MCvTermCriteria(_count, 0.001);
                     EigenObjectRecognizer recognizer = new EigenObjectRecognizer(_trainingImages.ToArray(), _labels.ToArray(), 1500, ref termCriterias);
                     _name = recognizer.Recognize(_result);
-                    _frame.Draw(_name, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.Green));
                 }
             }
-            _cameraBox.Image = _frame;
+            _cameraBox.Image = _result;
         }
 
         public void AddFace(TextBox textBox) // Requires a textbox that has the name in it
