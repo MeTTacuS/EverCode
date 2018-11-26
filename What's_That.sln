@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "What's_That", "What's_That\What's_That.csproj", "{99A9010F-76D5-4FBB-AA41-271179F4014C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTService", "WTService\WTService.csproj", "{07A255F0-5838-4F2F-9606-34DC67F900C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebService", "WebApplication1\WebService.csproj", "{B089F35F-D316-42B6-949F-F7502E37434E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{99A9010F-76D5-4FBB-AA41-271179F4014C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{99A9010F-76D5-4FBB-AA41-271179F4014C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{99A9010F-76D5-4FBB-AA41-271179F4014C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{99A9010F-76D5-4FBB-AA41-271179F4014C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{07A255F0-5838-4F2F-9606-34DC67F900C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{07A255F0-5838-4F2F-9606-34DC67F900C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{07A255F0-5838-4F2F-9606-34DC67F900C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{07A255F0-5838-4F2F-9606-34DC67F900C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B089F35F-D316-42B6-949F-F7502E37434E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B089F35F-D316-42B6-949F-F7502E37434E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B089F35F-D316-42B6-949F-F7502E37434E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B089F35F-D316-42B6-949F-F7502E37434E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -50,7 +50,7 @@ namespace What_s_That
 
         private void label2_Click(object sender, EventArgs e)
         {
-            lebel2.text
+            lebel2.text;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
