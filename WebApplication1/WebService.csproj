@@ -90,7 +90,24 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppSettings.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Exeption\FaceApiException.cs" />
+    <Compile Include="FaceApi\FaceAddResponse.cs" />
+    <Compile Include="FaceApi\FaceApiError.cs" />
+    <Compile Include="FaceApi\FaceApiUtils.cs" />
+    <Compile Include="FaceApi\FaceAttributes.cs" />
+    <Compile Include="FaceApi\FaceDetectResponse.cs" />
+    <Compile Include="FaceApi\FaceIdentifyRequest.cs" />
+    <Compile Include="FaceApi\FaceIdentifyResponse.cs" />
+    <Compile Include="FaceApi\FaceLandmarks.cs" />
+    <Compile Include="FaceApi\PersistedFace.cs" />
+    <Compile Include="FaceApi\PersonCreateRequest.cs" />
+    <Compile Include="FaceApi\PersonCreateResponse.cs" />
+    <Compile Include="FaceApi\PersonGroupCreateRequest.cs" />
+    <Compile Include="FaceApi\PersonGroupGetResponse.cs" />
+    <Compile Include="FaceApi\PersonGroupTrainingStatusResponse.cs" />
+    <Compile Include="FaceApi\PersonResponse.cs" />
     <Compile Include="Controllers\PeopleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -105,7 +122,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\WebService20181206023250 - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
