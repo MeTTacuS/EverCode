@@ -13,7 +13,7 @@ using WTServise.Loger;
 
 namespace WTServise.Controllers
 {
-    public class ValuesController : ApiController
+    public class RecognitionController : ApiController
     {
         FileLoger loger = new FileLoger();
 

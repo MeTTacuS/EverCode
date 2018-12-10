@@ -120,7 +120,7 @@
     <Compile Include="FaceApi\PersonGroupGetResponse.cs" />
     <Compile Include="FaceApi\PersonGroupTrainingStatusResponse.cs" />
     <Compile Include="FaceApi\PersonResponse.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\RecognitionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
