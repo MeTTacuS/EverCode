@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PersonManager.FaceApi
 {
-   class PersonResponse
+   public class PersonResponse
    {
       public string PersonId { get; set; }
       public string Name { get; set; }

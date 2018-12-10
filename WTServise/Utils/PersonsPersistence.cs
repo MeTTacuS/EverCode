@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
+using WTServise.Loger;
 
 namespace PersonManager.Utils
 {
@@ -10,14 +11,15 @@ namespace PersonManager.Utils
 
       public static bool AddPersonGroup(string personGroupId)
       {
-         try
+            FileLoger _loger = new FileLoger();
+            try
          {
             Directory.CreateDirectory(Path.Combine(AppSettings.PersonGroupBaseFolder, personGroupId));
             return true;
          }
          catch (Exception ex)
          {
-            MessageBox.Show(ex.Message);
+            _loger.Log(ex.Message);
          }
 
          return false;
@@ -25,14 +27,15 @@ namespace PersonManager.Utils
 
       public static bool DeletePersonGroup(string personGroupId)
       {
-         try
+            FileLoger _loger = new FileLoger();
+            try
          {
             Directory.Delete(Path.Combine(AppSettings.PersonGroupBaseFolder, personGroupId), true);
             return true;
          }
          catch (Exception ex)
          {
-            MessageBox.Show(ex.Message);
+                _loger.Log(ex.Message);
          }
 
          return false;
@@ -40,7 +43,8 @@ namespace PersonManager.Utils
 
       public static bool AddPersonInGroup(string personGroupId, string personId)
       {
-         try
+            FileLoger _loger = new FileLoger();
+            try
          {
             Directory.CreateDirectory(
                Path.Combine(AppSettings.PersonGroupBaseFolder, 
@@ -49,7 +53,7 @@ namespace PersonManager.Utils
          }
          catch (Exception ex)
          {
-            MessageBox.Show(ex.Message);
+                _loger.Log(ex.Message);
          }
 
          return false;
@@ -57,7 +61,8 @@ namespace PersonManager.Utils
 
       public static bool DeletePersonInGroup(string personGroupId, string personId)
       {
-         try
+            FileLoger _loger = new FileLoger();
+            try
          {
             Directory.Delete(
                Path.Combine(AppSettings.PersonGroupBaseFolder, 
@@ -67,7 +72,7 @@ namespace PersonManager.Utils
          }
          catch (Exception ex)
          {
-            MessageBox.Show(ex.Message);
+                _loger.Log(ex.Message);
          }
 
          return false;

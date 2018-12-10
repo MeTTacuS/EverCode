@@ -126,7 +126,6 @@
     </Compile>
     <Compile Include="Loger\FileLoger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\ImageUtils.cs" />
     <Compile Include="Utils\PersonsPersistence.cs" />
   </ItemGroup>
   <ItemGroup>

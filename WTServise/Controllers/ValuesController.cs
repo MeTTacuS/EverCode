@@ -15,23 +15,16 @@ namespace WTServise.Controllers
 {
     public class ValuesController : ApiController
     {
-        private string m_sourcePath;
         FileLoger loger = new FileLoger();
 
-        // GET api/values
-        [SwaggerOperation("GetAll")]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
+        
         // GET api/values/5
         [SwaggerOperation("GetById")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
-        public async System.Threading.Tasks.Task<PersonResponse> GetAsync(byte[] data)
+        public async System.Threading.Tasks.Task<PersonResponse> GetPersonAsync([FromBody]byte[] data)
         {
-            PersonGroupGetResponse selection= new PersonGroupGetResponse()
+            PersonGroupGetResponse selection = new PersonGroupGetResponse();
 
                 try
                 {
@@ -47,8 +40,7 @@ namespace WTServise.Controllers
                                selection.PersonGroupId,
                                1);
 
-                            if (identifyResult != null && identifyResult.Count > 0 &&
-                               identifyResult[0].Candidates.Count > 0)
+                            if (identifyResult != null && identifyResult.Count > 0 && identifyResult[0].Candidates.Count > 0)
                             {
                                 var personId = identifyResult[0].Candidates[0].PersonId;
                                 var confidence = identifyResult[0].Candidates[0].Confidence;
@@ -60,53 +52,33 @@ namespace WTServise.Controllers
                                 var faceFiles = PersonsPersistence.GetFaceFiles(selection.PersonGroupId, personId);
                                 if (faceFiles != null && faceFiles.Length > 0)
                                 {
-                                    var image = ImageUtils.LoadBitmapImage(faceFiles[0].FullName);
                                     return person;
                                 }
+                            else { return null; }
                             }
                             else
                             {
                                 loger.Log("Person could not be identified!");
+                                return null;
                             }
                         }
+                        else { return null; }
                     }
+                else { return null; }
                 }
                 catch (FaceApiException ex)
                 {
-                    
                     loger.Log(ex.Message, ex.Code);
+                    return null;                   
                 }
                 catch (Exception ex)
                 {
-                   
                     loger.Log(ex.Message);
+                    return null;                    
                 }
 
             }
         }
     };
 
-        // POST api/values
-        [SwaggerOperation("Create")]
-        [SwaggerResponse(HttpStatusCode.Created)]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        [SwaggerOperation("Update")]
-        [SwaggerResponse(HttpStatusCode.OK)]
-        [SwaggerResponse(HttpStatusCode.NotFound)]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [SwaggerOperation("Delete")]
-        [SwaggerResponse(HttpStatusCode.OK)]
-        [SwaggerResponse(HttpStatusCode.NotFound)]
-        public void Delete(int id)
-        {
-        }
-    }
-}
+      
