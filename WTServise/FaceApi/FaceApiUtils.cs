@@ -4,12 +4,15 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using WTServise.Loger;
 
 namespace PersonManager.FaceApi
 {
    class FaceApiUtils
    {
       private static string OcpApimSubscriptionKey = "Ocp-Apim-Subscription-Key";
+        FileLoger loger = new FileLoger();
+
 
       #region face
 
@@ -378,6 +381,28 @@ namespace PersonManager.FaceApi
          }
       }
 
-      #endregion
-   }
+        #endregion
+
+        public static async Task<string> AddFace(string personId, byte[] data)
+        {
+            try
+            {
+
+                var persistedFaceId = await FaceApiUtils.AddFaceToPerson(AppSettings.GroupId, personId, data);
+                //this where reading and writing to database should be
+
+                return persistedFaceId;
+            }
+            catch (FaceApiException e)
+            {
+                loger.Log(e.Message);
+            }
+            catch (System.Exception e)
+            {
+                loger.Log(e.Message);
+            }
+
+            return null;
+        }
+    }
 }

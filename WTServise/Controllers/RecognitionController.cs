@@ -82,7 +82,7 @@ namespace WTServise.Controllers
 
         public async Task<string> PostPersonAsync(string personId ,byte[] data)
         {
-            var persistedFaceId= await AddFace(personId, data);
+            var persistedFaceId= await FaceApiUtils.AddFace(personId, data);
 
             try
             {
@@ -126,26 +126,29 @@ namespace WTServise.Controllers
         }
 
 
-        private async Task<string> AddFace( string personId, byte[] data)
+        
+
+        private async Task DeletePerson(string personId)
         {
-            try
-            {
 
-                var persistedFaceId = await FaceApiUtils.AddFaceToPerson(AppSettings.GroupId, personId, data);
-                //this where reading and writing to database should be
+                try
+                {
+                    var result = await FaceApiUtils.DeletePersonInGroup(AppSettings.GroupId, personId);
 
-                return persistedFaceId;
-            }
-            catch (FaceApiException e)
-            {
-                loger.Log(e.Message);
-            }
-            catch (Exception e)
-            {
-                loger.Log(e.Message);
-            }
+                    if (result)
+                    {
+                        PersonsPersistence.DeletePersonInGroup(AppSettings.GroupId, personId);
+                    }
+                }
+                catch (FaceApiException ex)
+                {
+                    loger.Log(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    loger.Log(ex.Message);
+                }
 
-            return null;
         }
     }
     };
