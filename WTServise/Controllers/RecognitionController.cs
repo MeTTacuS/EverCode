@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using PersonManager;
 using PersonManager.FaceApi;
@@ -78,7 +79,75 @@ namespace WTServise.Controllers
                 }
 
             }
+
+        public async Task<string> PostPersonAsync(string personId ,byte[] data)
+        {
+            var persistedFaceId= await AddFace(personId, data);
+
+            try
+            {
+                var result = await FaceApiUtils.TrainPersonGroup(AppSettings.GroupId);
+
+                if (result)
+                {
+                    while (true)
+                    {
+                        var status = await FaceApiUtils.GetPersonGroupTrainingStatus(AppSettings.GroupId);
+                        if (status == PersonGroupTrainingStatus.failed)
+                        {
+                            return null;
+                            break;
+                        }
+                        else if (status == PersonGroupTrainingStatus.succeeded)
+                        {
+                            return persistedFaceId;
+                            break;
+                        }
+
+                        System.Threading.Thread.Sleep(1000);
+                    };
+                }
+                else
+                {
+                    loger.Log("smth happened with the result in PostPersonAsync");
+                    return null;
+                }
+            }
+            catch (FaceApiException ex)
+            {
+                loger.Log(ex.Message);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                loger.Log(ex.Message);
+                return null;
+            }
         }
+
+
+        private async Task<string> AddFace( string personId, byte[] data)
+        {
+            try
+            {
+
+                var persistedFaceId = await FaceApiUtils.AddFaceToPerson(AppSettings.GroupId, personId, data);
+                //this where reading and writing to database should be
+
+                return persistedFaceId;
+            }
+            catch (FaceApiException e)
+            {
+                loger.Log(e.Message);
+            }
+            catch (Exception e)
+            {
+                loger.Log(e.Message);
+            }
+
+            return null;
+        }
+    }
     };
 
       

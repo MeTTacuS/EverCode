@@ -40,5 +40,12 @@ namespace PersonManager
             return ConfigurationManager.AppSettings["PersonGroupBaseFolder"];
          }
       }
-   }
+        public static string GroupId
+        {
+            get
+            {
+                return "1";
+            }
+        }
+    }
 }
