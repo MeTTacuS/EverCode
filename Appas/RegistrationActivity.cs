@@ -68,10 +68,9 @@ namespace Appas
                 {
                     //Convert byte array back into bitmap
                     Bitmap bitmap = BitmapFactory.DecodeByteArray(bitmapData, 0, bitmapData.Length);
-                    photoView.SetImageBitmap(bitmap);
+                   photoView.SetImageBitmap(bitmap);
                 }
             }
-            // if you got here something bad happened...
         }
     }
 }

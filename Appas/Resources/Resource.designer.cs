@@ -2603,8 +2603,8 @@ namespace Appas
 			// aapt resource value: 0x7f08000a
 			public const int ghost_view = 2131230730;
 			
-			// aapt resource value: 0x7f0800bc
-			public const int goBack = 2131230908;
+			// aapt resource value: 0x7f0800ba
+			public const int goBack = 2131230906;
 			
 			// aapt resource value: 0x7f080005
 			public const int home = 2131230725;
@@ -2744,11 +2744,11 @@ namespace Appas
 			// aapt resource value: 0x7f080075
 			public const int radio = 2131230837;
 			
-			// aapt resource value: 0x7f0800bb
-			public const int reg_pass = 2131230907;
+			// aapt resource value: 0x7f0800bc
+			public const int reg_pass = 2131230908;
 			
-			// aapt resource value: 0x7f0800ba
-			public const int reg_user = 2131230906;
+			// aapt resource value: 0x7f0800bb
+			public const int reg_user = 2131230907;
 			
 			// aapt resource value: 0x7f0800a3
 			public const int registrationas = 2131230883;
