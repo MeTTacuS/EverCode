@@ -4,14 +4,12 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using WTServise.Loger;
 
 namespace PersonManager.FaceApi
 {
    class FaceApiUtils
    {
       private static string OcpApimSubscriptionKey = "Ocp-Apim-Subscription-Key";
-        FileLoger loger = new FileLoger();
 
 
       #region face

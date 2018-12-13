@@ -16,7 +16,6 @@ namespace WTServise.Controllers
 {
     public class RecognitionController : ApiController
     {
-        FileLoger loger = new FileLoger();
 
         
         // GET api/values/5
@@ -51,7 +50,6 @@ namespace WTServise.Controllers
                             }
                             else
                             {
-                                loger.Log("Person could not be identified!");
                                 return null;
                             }
                         }
@@ -61,12 +59,10 @@ namespace WTServise.Controllers
                 }
                 catch (FaceApiException ex)
                 {
-                    loger.Log(ex.Message, ex.Code);
                     return null;                   
                 }
                 catch (Exception ex)
                 {
-                    loger.Log(ex.Message);
                     return null;                    
                 }
 
@@ -101,18 +97,15 @@ namespace WTServise.Controllers
                 }
                 else
                 {
-                    loger.Log("smth happened with the result in PostPersonAsync");
                     return null;
                 }
             }
             catch (FaceApiException ex)
             {
-                loger.Log(ex.Message);
                 return null;
             }
             catch (Exception ex)
             {
-                loger.Log(ex.Message);
                 return null;
             }
         }
@@ -126,19 +119,14 @@ namespace WTServise.Controllers
                 try
                 {
                     var result = await FaceApiUtils.DeletePersonInGroup(AppSettings.GroupId, personId);
-
-                    if (result)
-                    {
-                        PersonsPersistence.DeletePersonInGroup(AppSettings.GroupId, personId);
-                    }
                 }
                 catch (FaceApiException ex)
                 {
-                    loger.Log(ex.Message);
+
                 }
                 catch (Exception ex)
                 {
-                    loger.Log(ex.Message);
+
                 }
 
         }
