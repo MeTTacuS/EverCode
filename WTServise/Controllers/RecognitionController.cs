@@ -14,17 +14,15 @@ namespace WTServise.Controllers
 {
     public class RecognitionController : ApiController
     {
-
         
-        // GET api/values/5
-        [SwaggerOperation("GetById")]
+        //byte[] data = System.IO.File.ReadAllBytes(@"D:\Programavimas\C#\Top\base64_decrypt.bin");
+
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
-        public async System.Threading.Tasks.Task<string> GetPersonAsync([FromBody]byte[] data)
+        public async System.Threading.Tasks.Task<string> GetPersonAsync([FromBody]byte[] data) 
         {
-            
 
-                try
+            try
                 {
 
                     var detectResult = await FaceApiUtils.DetectFace(data);
@@ -66,9 +64,17 @@ namespace WTServise.Controllers
 
             }
 
-        public async Task<string> PostPersonAsync(string personId ,byte[] data)
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        public async Task<string> PostPersonAsync(PersonCreateRequest person)
         {
-            var persistedFaceId= await FaceApiUtils.AddFace(personId, data);
+            if(await FaceApiUtils.GetPersonGroup() == null)
+            {
+                await FaceApiUtils.CreatePersonGroup();
+            }
+
+            string personId = await FaceApiUtils.CreatePersonInGroup(person.Name, person.UserData);
+            var persistedFaceId= await FaceApiUtils.AddFace(personId, person.Image);
 
             try
             {
@@ -109,9 +115,10 @@ namespace WTServise.Controllers
         }
 
 
-        
 
-        private async Task DeletePerson(string personId)
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        private async Task DeletePersonAsync(string personId)
         {
 
                 try

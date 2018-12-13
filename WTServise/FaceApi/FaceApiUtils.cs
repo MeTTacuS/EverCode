@@ -102,8 +102,9 @@ namespace PersonManager.FaceApi
          }
       }
 
-      public static async Task<PersonGroupGetResponse> GetPersonGroup(string personGroupId)
+      public static async Task<PersonGroupGetResponse> GetPersonGroup()
       {
+            string personGroupId = AppSettings.GroupId;
          using (var client = new HttpClient())
          {
 
@@ -122,23 +123,28 @@ namespace PersonManager.FaceApi
             {
                var errorText = await response.Content.ReadAsStringAsync();
                var errorResponse = JsonConvert.DeserializeObject<FaceApiErrorResponse>(errorText);
-               throw new FaceApiException(errorResponse.Error.Code, errorResponse.Error.Message);
-            }
+                    return null;
+                    throw new FaceApiException(errorResponse.Error.Code, errorResponse.Error.Message);
+                    
+                }
          }
       }
 
-      public static async Task<bool> CreatePersonGroup(string personGroupId, string name, string description)
+      public static async Task<bool> CreatePersonGroup()
       {
+            string personGroupId = AppSettings.GroupId;
+            string name = AppSettings.GroupName;
+            string discription = AppSettings.GroupDesc;
          using (var client = new HttpClient())
          {
             client.DefaultRequestHeaders.Add(OcpApimSubscriptionKey, AppSettings.Key1);
 
             var uri = $"{AppSettings.Endpoint}/persongroups/{personGroupId}";
 
-            var body = new PersonGroupCreateRequest()
-            {
-               Name = name,
-               UserData = description
+                var body = new PersonGroupCreateRequest()
+                {
+                    Name = name,
+                    UserData = discription
             };
             var bodyText = JsonConvert.SerializeObject(body);
 
@@ -252,8 +258,9 @@ namespace PersonManager.FaceApi
          }
       }
 
-      public static async Task<string> CreatePersonInGroup(string personGroupId, string personName, string personDescription)
+      public static async Task<string> CreatePersonInGroup( string personName, string personDescription)
       {
+            string personGroupId = AppSettings.GroupId;
          using (var client = new HttpClient())
          {
             client.DefaultRequestHeaders.Add(OcpApimSubscriptionKey, AppSettings.Key1);

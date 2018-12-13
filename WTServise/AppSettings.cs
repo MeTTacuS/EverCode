@@ -47,5 +47,19 @@ namespace PersonManager
                 return "1";
             }
         }
+        public static string GroupName
+        {
+            get
+            {
+                return "group";
+            }
+        }
+        public static string GroupDesc
+        {
+            get
+            {
+                return "desc";
+            }
+        }
     }
 }
