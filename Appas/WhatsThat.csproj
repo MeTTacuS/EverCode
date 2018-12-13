@@ -60,6 +60,7 @@
     <Compile Include="Fragments\DemoFragment.cs" />
     <Compile Include="Fragments\DemoFragment2.cs" />
     <Compile Include="Fragments\PersonFragment.cs" />
+    <Compile Include="GalleryActivity.cs" />
     <Compile Include="LoginActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Person.cs" />
