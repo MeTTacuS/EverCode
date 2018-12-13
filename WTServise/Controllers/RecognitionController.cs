@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using PersonManager;
 using PersonManager.FaceApi;
-using PersonManager.Utils;
 using Swashbuckle.Swagger.Annotations;
-using WTServise.Loger;
 
 namespace WTServise.Controllers
 {
