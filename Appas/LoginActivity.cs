@@ -23,7 +23,13 @@ namespace Appas
 
             var user = FindViewById<EditText>(Resource.Id.username);
             var pass = FindViewById<EditText>(Resource.Id.password);
-            Button loginas = FindViewById<Button>(Resource.Id.prisijungimas);
+            Button loginas = FindViewById<Button>(Resource.Id.loginas);
+            Button registeris = FindViewById<Button>(Resource.Id.registrationas);
+
+            registeris.Click += delegate
+            {
+                StartActivity(typeof(RegistrationActivity));
+            };
 
             loginas.Click += delegate
             {
