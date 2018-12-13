@@ -14,13 +14,14 @@ namespace WTServise.Controllers
 {
     public class RecognitionController : ApiController
     {
-        
         //byte[] data = System.IO.File.ReadAllBytes(@"D:\Programavimas\C#\Top\base64_decrypt.bin");
 
-        [SwaggerResponse(HttpStatusCode.OK)]
-        [SwaggerResponse(HttpStatusCode.NotFound)]
-        public async System.Threading.Tasks.Task<string> GetPersonAsync([FromBody]byte[] data) 
+        /*[SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]*/
+        [HttpGet]
+        public async System.Threading.Tasks.Task<string> GetPersonAsync([FromBody]byte[] data) //[
         {
+            
 
             try
                 {
@@ -64,15 +65,15 @@ namespace WTServise.Controllers
 
             }
 
-        [SwaggerResponse(HttpStatusCode.OK)]
-        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [HttpPost]
         public async Task<string> PostPersonAsync(PersonCreateRequest person)
         {
+            
             if(await FaceApiUtils.GetPersonGroup() == null)
             {
                 await FaceApiUtils.CreatePersonGroup();
             }
-
+            
             string personId = await FaceApiUtils.CreatePersonInGroup(person.Name, person.UserData);
             var persistedFaceId= await FaceApiUtils.AddFace(personId, person.Image);
 
