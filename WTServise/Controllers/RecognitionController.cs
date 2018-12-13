@@ -23,9 +23,9 @@ namespace WTServise.Controllers
         [SwaggerOperation("GetById")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
-        public async System.Threading.Tasks.Task<PersonResponse> GetPersonAsync([FromBody]byte[] data)
+        public async System.Threading.Tasks.Task<string> GetPersonAsync([FromBody]byte[] data)
         {
-            PersonGroupGetResponse selection = new PersonGroupGetResponse();
+            
 
                 try
                 {
@@ -38,7 +38,7 @@ namespace WTServise.Controllers
                         {
                             var identifyResult = await FaceApiUtils.Identify(
                                faceId,
-                               selection.PersonGroupId,
+                               AppSettings.GroupId,
                                1);
 
                             if (identifyResult != null && identifyResult.Count > 0 && identifyResult[0].Candidates.Count > 0)
@@ -46,16 +46,8 @@ namespace WTServise.Controllers
                                 var personId = identifyResult[0].Candidates[0].PersonId;
                                 var confidence = identifyResult[0].Candidates[0].Confidence;
 
-                                var person = await FaceApiUtils.GetPerson(selection.PersonGroupId, personId);
-
-                                
-
-                                var faceFiles = PersonsPersistence.GetFaceFiles(selection.PersonGroupId, personId);
-                                if (faceFiles != null && faceFiles.Length > 0)
-                                {
-                                    return person;
-                                }
-                            else { return null; }
+                                var person = await FaceApiUtils.GetPerson(AppSettings.GroupId, personId);
+                                return person.PersonId;
                             }
                             else
                             {

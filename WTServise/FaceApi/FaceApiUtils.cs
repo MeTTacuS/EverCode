@@ -394,12 +394,11 @@ namespace PersonManager.FaceApi
                 return persistedFaceId;
             }
             catch (FaceApiException e)
-            {
-                loger.Log(e.Message);
+            { 
             }
             catch (System.Exception e)
             {
-                loger.Log(e.Message);
+                
             }
 
             return null;
