@@ -110,27 +110,28 @@ namespace Appas
 
             if (id == Resource.Id.nav_camera)
             {
-                ShowFragment(demo);
+                StartActivity(typeof(GalleryActivity));
+                //ShowFragment(demo);
             }
             else if (id == Resource.Id.nav_gallery)
             {
-                ShowFragment(person);
+                ShowFragment(demo2);
             }
             else if (id == Resource.Id.nav_slideshow)
             {
-                ShowFragment(demo2);
+                ShowFragment(person);
             }
             else if (id == Resource.Id.nav_manage)
             {
-                ShowFragment(demo2);
+                ShowFragment(person);
             }
             else if (id == Resource.Id.nav_share)
             {
-                ShowFragment(demo);
+                ShowFragment(person);
             }
             else if (id == Resource.Id.nav_send)
             {
-                ShowFragment(demo2);
+                ShowFragment(person);
             }
 
             DrawerLayout drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);

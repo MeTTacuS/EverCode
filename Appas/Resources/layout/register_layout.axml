@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout 
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -8,8 +7,14 @@
 	android:paddingLeft = "24dp"
 	android:paddingRight = "24dp">
 
+	<Button
+		android:id="@+id/goBack"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="Back"/>
+
 	<EditText
-		android:id="@+id/username"
+		android:id="@+id/reg_user"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:paddingTop="60dp"
@@ -17,24 +22,42 @@
 		android:inputType="textMultiLine" />
 
 	<EditText
-		android:id="@+id/password"
+		android:id="@+id/reg_pass"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:paddingTop="60dp"
 		android:hint="@string/passwords"
 		android:inputType="textMultiLine" />
+	
+	<LinearLayout
+	android:orientation="horizontal"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content">
 
-	<Button
-		android:id="@+id/loginas"
+		<Button
+		android:id="@+id/takePhoto"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="Login"/>
+		android:text="Take photo"/>	
 
-	<Button
-		android:id="@+id/registrationas"
+		<Button
+		android:id="@+id/confirmReg"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:text="register"
 		android:background="#FF0000"
 		android:textColor="#FFF"/>
+		
+
+		</LinearLayout>
+	
+
+
+	<ImageView
+		android:id="@+id/usersPhoto"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:scaleType="centerCrop"/>
+
+
 </LinearLayout>
