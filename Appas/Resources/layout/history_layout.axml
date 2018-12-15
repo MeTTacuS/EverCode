@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<Button
+		android:id="@+id/startDateButton"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="Nuo"
+		/>
+
+
+	<Button
+		android:id="@+id/endDateButton"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="Iki"
+		/>
+
+	<Button 
+		android:text="Show results" 
+		android:layout_width="match_parent" 
+		android:layout_height="wrap_content"
+		android:id="@+id/btnShow" />  
+
+	<ListView
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/historyView" />
+
+</LinearLayout>

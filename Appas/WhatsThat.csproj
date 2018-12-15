@@ -58,13 +58,15 @@
   <ItemGroup>
     <Compile Include="Acount.cs" />
     <Compile Include="Fragments\DemoFragment.cs" />
-    <Compile Include="Fragments\DemoFragment2.cs" />
+    <Compile Include="Fragments\HistoryFragment.cs" />
     <Compile Include="Fragments\PersonFragment.cs" />
     <Compile Include="GalleryActivity.cs" />
+    <Compile Include="History.cs" />
     <Compile Include="LoginActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="RegistrationActivity.cs" />
+    <Compile Include="Resources\HistoryAdapter.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -129,7 +131,7 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\demo2_layout.axml">
+    <AndroidResource Include="Resources\layout\history_layout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -151,6 +153,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\register_layout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\history_list_view_dataTemplate.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
