@@ -10,7 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace Appas.RecognitionGandler
+namespace Appas.RecognitionHandler
 {
     public class FaceRecognizedEvent
     {

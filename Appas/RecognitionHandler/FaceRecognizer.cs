@@ -9,16 +9,20 @@ using System.Text;
 using System.Threading.Tasks;
 using Android.Graphics;
 using Android.Widget;
+using Appas;
 using Appas.Model;
-using Appas.RecognitionGandler;
+using Appas.RecognitionHandler;
 using Newtonsoft.Json;
-using static Appas.RecognitionGandler.FaceAddedEvent;
-using static Appas.RecognitionGandler.FaceRecognizedEvent;
+using PersonManager.FaceApi;
+using static Appas.RecognitionHandler.FaceAddedEvent;
+using static Appas.RecognitionHandler.FaceRecognizedEvent;
 
-namespace eLibrus
+namespace Appas.RecognitionHandler
+
 {
     public class FaceRecognizer
     {
+        const string OcpApimSubscriptionKey = "Ocp-Apim-Subscription-Key";
         const string subscriptionKey = "f4ff0a8d3a30477ea495ad08dbb72bd1";
         const string uriBase = "https://northeurope.api.cognitive.microsoft.com/face/v1.0/";
         public event FaceRecognizedEventHandler OnRecognized;
@@ -28,6 +32,10 @@ namespace eLibrus
         {
             try
             {
+                if(GetPersonGroup(AppSettings.GroupId) == null)
+                {
+                    await CreatePersonGroup(AppSettings.GroupId, "people");
+                }
                 // Create person
                 string personID = string.Empty;
                 try
@@ -98,7 +106,7 @@ namespace eLibrus
             client.DefaultRequestHeaders.Add(
                 "Ocp-Apim-Subscription-Key", subscriptionKey);
 
-            string uri = uriBase + "persongroups/1/persons/";
+            string uri = uriBase + $"persongroups/{AppSettings.GroupId}/persons/";
 
             var newPerson = new
             {
@@ -149,7 +157,7 @@ namespace eLibrus
             client.DefaultRequestHeaders.Add(
                 "Ocp-Apim-Subscription-Key", subscriptionKey);
 
-            string uri = uriBase + "persongroups/1/persons/" + personID + "/persistedFaces";
+            string uri = uriBase + $"persongroups/{AppSettings.GroupId}/persons/" + personID + "/persistedFaces";
 
 
             HttpResponseMessage response;
@@ -182,7 +190,7 @@ namespace eLibrus
             client.DefaultRequestHeaders.Add(
                 "Ocp-Apim-Subscription-Key", subscriptionKey);
 
-            string uri = uriBase + "persongroups/1/train";
+            string uri = uriBase + $"persongroups/{AppSettings.GroupId}/train";
 
             HttpResponseMessage response;
 
@@ -229,7 +237,7 @@ namespace eLibrus
             client.DefaultRequestHeaders.Add(
                 "Ocp-Apim-Subscription-Key", subscriptionKey);
 
-            string uri = uriBase + "persongroups/1/persons/" + faceID;
+            string uri = uriBase + $"persongroups/{AppSettings.GroupId}/persons/" + faceID;
 
             HttpResponseMessage response;
             
@@ -364,6 +372,58 @@ namespace eLibrus
                 bitmapData = stream.ToArray();
             }
             return bitmapData;
+        }
+
+        public static async Task<bool> CreatePersonGroup(string personGroupId, string groupName)
+        {
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Add(OcpApimSubscriptionKey, subscriptionKey);
+
+                var uri = $"{uriBase}/persongroups/{personGroupId}";
+
+                var body = new PersonGroupCreateRequest()
+                {
+                    Name = groupName,
+                    UserData = ""
+                };
+                var bodyText = JsonConvert.SerializeObject(body);
+
+                var httpContent = new StringContent(bodyText, Encoding.UTF8, "application/json");
+
+                var response = await client.PutAsync(uri, httpContent);
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorText = await response.Content.ReadAsStringAsync();
+                    return false;
+                }
+
+                return response.IsSuccessStatusCode;
+            }
+        }
+
+        public static async Task<PersonGroupGetResponse> GetPersonGroup(string personGroupId)
+        {
+            using (var client = new HttpClient())
+            {
+
+                client.DefaultRequestHeaders.Add(OcpApimSubscriptionKey, subscriptionKey);
+
+                var uri = $"{uriBase}/persongroups/{personGroupId}";
+
+                var response = await client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseBody = await response.Content.ReadAsStringAsync();
+                    var list = JsonConvert.DeserializeObject<PersonGroupGetResponse>(responseBody);
+                    return list;
+                }
+                else
+                {
+                    var errorText = await response.Content.ReadAsStringAsync();
+                    return null;
+                }
+            }
         }
 
         static string JsonPrettyPrint(string json)
