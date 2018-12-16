@@ -17,12 +17,13 @@ namespace Appas.Handlers
 {
     class RegistrationHandler
     {
-        private static RestClient _client = new RestClient("http://localhost:51237/");
+        private static RestClient _client = new RestClient("https://whosthatdatabasefinal.azurewebsites.net");
         public static Context context;
 
         public int Register(string username, string password, string repeatPassword)
         {
-            var request = new RestRequest("api/registration", Method.POST);
+            Console.WriteLine("labastiksu0");
+            var request = new RestRequest("api/Registration", Method.POST);
             RegistrationModel newUser = new RegistrationModel();
             newUser.username = username;
             newUser.password = password;
@@ -32,11 +33,15 @@ namespace Appas.Handlers
             request.AddParameter("application/json", json, ParameterType.RequestBody);
             IRestResponse response = _client.Execute(request);
 
-            if (!response.IsSuccessful)
-                return 0;
-            else
+            if (response.IsSuccessful)
             {
                 return 1;
+
+            }
+            else
+            {
+                Console.WriteLine("labastiksu0");
+                return 0;
             }
         }
     }

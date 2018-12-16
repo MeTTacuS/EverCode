@@ -12,6 +12,7 @@ using Android.Provider;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Appas.Handlers;
 
 namespace Appas
 {
@@ -43,9 +44,10 @@ namespace Appas
 
             confirmButton.Click += delegate
             {
-                //cia suinciam IPA data
-                //po to prisijungiam
-                StartActivity(typeof(MainActivity));
+                Console.WriteLine("asd");
+                RegistrationHandler handler = new RegistrationHandler();
+                if (handler.Register(user.Text, pass.Text, pass.Text) == 1)
+                    StartActivity(typeof(MainActivity));
             };
         }
 
