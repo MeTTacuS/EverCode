@@ -10,9 +10,10 @@ using System.Threading.Tasks;
 using Android.Graphics;
 using Android.Widget;
 using Appas.Model;
+using Appas.RecognitionGandler;
 using Newtonsoft.Json;
-using static eLibrus.Events.FaceAddedEvent;
-using static eLibrus.Events.FaceRecognizedEvent;
+using static Appas.RecognitionGandler.FaceAddedEvent;
+using static Appas.RecognitionGandler.FaceRecognizedEvent;
 
 namespace eLibrus
 {
@@ -205,14 +206,14 @@ namespace eLibrus
                 string faceId =  await Identify(result.faceId);
                 if(faceId == string.Empty)
                 {
-                    OnRecognized(this, new Events.FaceRecognizedEventArgs(0));
+                    OnRecognized(this, new FaceRecognizedEventArgs(0));
 
                     return;
                 }
 
                 int userID = await GetUserID(faceId);
 
-                OnRecognized(this, new Events.FaceRecognizedEventArgs(userID));
+                OnRecognized(this, new FaceRecognizedEventArgs(userID));
 
             }
             catch (Exception e)
