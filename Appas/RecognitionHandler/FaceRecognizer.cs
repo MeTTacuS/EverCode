@@ -495,7 +495,7 @@ namespace Appas.RecognitionHandler
                 client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
                 string Id = personId.ToString();
 
-                var uri = $"{uriBase}/persongroups/{AppSettings.GroupId}/persons/{Id}";
+                var uri = uriBase +$"persongroups/{AppSettings.GroupId}/persons/" + Id;
 
                 var response = await client.DeleteAsync(uri);
                 if (!response.IsSuccessStatusCode)
@@ -503,8 +503,7 @@ namespace Appas.RecognitionHandler
                     var errorText = await response.Content.ReadAsStringAsync();
                     return false;
                 }
-
-                return response.IsSuccessStatusCode;
+               return response.IsSuccessStatusCode;
             }
         }
     }

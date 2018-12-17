@@ -32,7 +32,7 @@ namespace Appas.Fragments
             delete.Click += async (sender, e) =>
             {
                 bool x = await FaceRecognizer.DeletePerson(IDobj.ID);
-                Console.WriteLine("AR METODAS MAN PAVYKO " + x);
+                Console.WriteLine("AR METODAS MAN PAVYKO " + x + "----------------------------------------------------------------------------------------------------------------------");
             };
 
             return view;
