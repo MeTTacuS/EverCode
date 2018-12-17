@@ -12,4 +12,4 @@ namespace WhosThatDatabase.Models
         public string Password { get; set; }
         public byte[] ImageByteArray { get; set; }
     }
-}W
+}
