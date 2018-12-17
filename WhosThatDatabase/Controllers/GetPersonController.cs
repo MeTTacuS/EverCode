@@ -16,7 +16,8 @@ namespace WhosThatDatabase.Controllers
         {
             using (DatabaseContext db = new DatabaseContext())
             {
-                db.UserInfos.
+                var username = db.LoginInfos.First(a => a.ID == id);
+                return username.Username;
             }
         }
     }
