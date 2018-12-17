@@ -17,7 +17,7 @@ namespace Appas.APIUtils
 {
     class ApiRequestsUtils
     {
-        public async System.Threading.Tasks.Task<bool> RegistratePersonAsync(int ID, string Username, byte[] image)
+        public static async System.Threading.Tasks.Task<bool> RegistratePersonAsync(int ID, string Username, byte[] image)
         {
             HttpClient client = new HttpClient();
 
@@ -57,7 +57,7 @@ namespace Appas.APIUtils
 
         }
 
-        public async System.Threading.Tasks.Task<string> GetPersonAsync(int id)
+        public static async System.Threading.Tasks.Task<string> GetPersonAsync(int id)
         {
             HttpClient client = new HttpClient();
             string uri = $"{AppSettings.Uri}/api/getperson/{id}";
@@ -87,7 +87,7 @@ namespace Appas.APIUtils
             else { return null; }
         }
 
-        public async System.Threading.Tasks.Task<bool> AddUpvoteAsync(int id)
+        public static async System.Threading.Tasks.Task<bool> AddUpvoteAsync(int id)
         {
             HttpClient client = new HttpClient();
             string uri = $"{AppSettings.Uri}/api/upvote";
@@ -124,7 +124,7 @@ namespace Appas.APIUtils
 
         }
 
-        public async System.Threading.Tasks.Task<int> GetUpvotesAsync(int id)
+        public static async System.Threading.Tasks.Task<int> GetUpvotesAsync(int id)
         {
             HttpClient client = new HttpClient();
             string uri = $"{AppSettings.Uri}/api/upvote/{id}";
@@ -150,7 +150,7 @@ namespace Appas.APIUtils
             }
         }
 
-        public async System.Threading.Tasks.Task<bool> AddWhoSawWhoAsync(int WhoSawID, int WasSeenID, DateTime date)
+        public static async System.Threading.Tasks.Task<bool> AddWhoSawWhoAsync(int WhoSawID, int WasSeenID, DateTime date)
         {
             HttpClient client = new HttpClient();
 
@@ -188,6 +188,7 @@ namespace Appas.APIUtils
                 return false;
             }
         }
+
 
 
     }
