@@ -74,6 +74,7 @@
     <Compile Include="RecognitionHandler\FaceRecognizer.cs" />
     <Compile Include="RegistrationActivity.cs" />
     <Compile Include="Request Models\RegistrationRequest.cs" />
+    <Compile Include="Request Models\WhoSawWhoRequest.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

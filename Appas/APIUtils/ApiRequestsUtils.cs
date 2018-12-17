@@ -17,13 +17,13 @@ namespace Appas.APIUtils
 {
     class ApiRequestsUtils
     {
-        public async System.Threading.Tasks.Task<bool> RegistratePersonAsync (int ID, string Username, byte[] image)
+        public async System.Threading.Tasks.Task<bool> RegistratePersonAsync(int ID, string Username, byte[] image)
         {
             HttpClient client = new HttpClient();
 
             string uri = $"{AppSettings.Uri}/api/registration";
 
-            RegistrationRequest person = new RegistrationRequest() {ID=ID, Username = Username, image=image };
+            RegistrationRequest person = new RegistrationRequest() { ID = ID, Username = Username, image = image };
 
             StringContent queryString = null;
             try
@@ -51,7 +51,7 @@ namespace Appas.APIUtils
             }
             catch (Exception e)
             {
-                
+
                 return false;
             }
 
@@ -61,16 +61,6 @@ namespace Appas.APIUtils
         {
             HttpClient client = new HttpClient();
             string uri = $"{AppSettings.Uri}/api/getperson/{id}";
-
-            StringContent queryString = null;
-            try
-            {
-                queryString = new StringContent(JsonConvert.SerializeObject(id), Encoding.UTF8, "application/json");
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
 
             HttpResponseMessage response;
 
@@ -114,7 +104,7 @@ namespace Appas.APIUtils
 
             HttpResponseMessage response;
 
-            response = await client.PostAsync(uri, queryString);
+            response = await client.PutAsync(uri, queryString);
 
             string contentString = await response.Content.ReadAsStringAsync();
 
@@ -132,6 +122,71 @@ namespace Appas.APIUtils
                 return false;
             }
 
+        }
+
+        public async System.Threading.Tasks.Task<int> GetUpvotesAsync(int id)
+        {
+            HttpClient client = new HttpClient();
+            string uri = $"{AppSettings.Uri}/api/upvote/{id}";
+
+            HttpResponseMessage response;
+
+            response = await client.GetAsync(uri);
+
+            string contentString = await response.Content.ReadAsStringAsync();
+
+            try
+            {
+                var jsonSerializerSettings = new JsonSerializerSettings();
+                jsonSerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
+                var resp = JsonConvert.DeserializeObject<int>(contentString, jsonSerializerSettings);
+
+                return resp;
+            }
+            catch (Exception e)
+            {
+
+                return e.HResult;
+            }
+        }
+
+        public async System.Threading.Tasks.Task<bool> AddWhoSawWhoAsync(int WhoSawID, int WasSeenID, DateTime date)
+        {
+            HttpClient client = new HttpClient();
+
+            string uri = $"{AppSettings.Uri}/api/registration";
+
+            WhoSawWhoRequest model = new WhoSawWhoRequest() { WhoSawID = WhoSawID, WasSeenID = WasSeenID, Date = date };
+
+            StringContent queryString = null;
+            try
+            {
+                queryString = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+            HttpResponseMessage response;
+
+            response = await client.PostAsync(uri, queryString);
+
+            string contentString = await response.Content.ReadAsStringAsync();
+
+            try
+            {
+                var jsonSerializerSettings = new JsonSerializerSettings();
+                jsonSerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
+                var resp = JsonConvert.DeserializeObject<bool>(contentString, jsonSerializerSettings);
+
+                return resp;
+            }
+            catch (Exception e)
+            {
+
+                return false;
+            }
         }
 
 
