@@ -21,7 +21,7 @@ namespace Appas.APIUtils
         {
             HttpClient client = new HttpClient();
 
-            string uri = $"{AppSettings.Uri}/api/registration";
+            string uri = $"{AppSettings.Uri}api/registration";
 
             RegistrationRequest person = new RegistrationRequest() { ID = ID, Username = Username, image = image };
 
@@ -60,7 +60,7 @@ namespace Appas.APIUtils
         public static async System.Threading.Tasks.Task<string> GetPersonAsync(int id)
         {
             HttpClient client = new HttpClient();
-            string uri = $"{AppSettings.Uri}/api/getperson/{id}";
+            string uri = $"{AppSettings.Uri}api/getperson/{id}";
 
             HttpResponseMessage response;
 
@@ -91,7 +91,7 @@ namespace Appas.APIUtils
         public static async System.Threading.Tasks.Task<bool> AddUpvoteAsync(int id)
         {
             HttpClient client = new HttpClient();
-            string uri = $"{AppSettings.Uri}/api/upvote";
+            string uri = $"{AppSettings.Uri}api/upvote";
 
             StringContent queryString = null;
             try
@@ -128,7 +128,7 @@ namespace Appas.APIUtils
         public static async System.Threading.Tasks.Task<int> GetUpvotesAsync(int id)
         {
             HttpClient client = new HttpClient();
-            string uri = $"{AppSettings.Uri}/api/upvote/{id}";
+            string uri = $"{AppSettings.Uri}api/upvote/{id}";
 
             HttpResponseMessage response;
 
@@ -157,7 +157,7 @@ namespace Appas.APIUtils
         {
             HttpClient client = new HttpClient();
 
-            string uri = $"{AppSettings.Uri}/api/whosawwho";
+            string uri = $"{AppSettings.Uri}api/whosawwho";
 
             WhoSawWhoRequest model = new WhoSawWhoRequest() { WhoSawID = WhoSawID, WasSeenID = WasSeenID, Date = date };
 
