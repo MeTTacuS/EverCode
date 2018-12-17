@@ -500,8 +500,10 @@ namespace Appas.RecognitionHandler
                 var response = await client.DeleteAsync(uri);
                 if (!response.IsSuccessStatusCode)
                 {
+                    
                     var errorText = await response.Content.ReadAsStringAsync();
-                    return errorText;
+                    var errorResponse = JsonConvert.DeserializeObject<FaceApiErrorResponse>(errorText);
+                    return errorResponse.Error.Message;
                 }
                 return null;
             }

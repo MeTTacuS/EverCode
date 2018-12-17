@@ -58,7 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIUtils\ApiRequestsUtils.cs" />
+    <Compile Include="APIUtils\FaceApiError.cs" />
     <Compile Include="AppSettings.cs" />
+    <Compile Include="FaceApiError.cs" />
     <Compile Include="Fragments\DemoFragment.cs" />
     <Compile Include="Fragments\DemoFragment2.cs" />
     <Compile Include="Fragments\PersonFragment.cs" />
