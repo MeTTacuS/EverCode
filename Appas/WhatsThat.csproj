@@ -57,6 +57,8 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Acount.cs" />
+    <Compile Include="AppSettings.cs" />
     <Compile Include="Fragments\DemoFragment.cs" />
     <Compile Include="Fragments\DemoFragment2.cs" />
     <Compile Include="Fragments\PersonFragment.cs" />
@@ -66,6 +68,8 @@
     <Compile Include="Model\DetectedFace.cs" />
     <Compile Include="Model\IdentifiedFace.cs" />
     <Compile Include="Model\Person.cs" />
+    <Compile Include="Model\PersonGroupCreateRequest.cs" />
+    <Compile Include="Model\PersonGroupGetResponse.cs" />
     <Compile Include="RecognitionHandler\FaceRecognizedEvent.cs" />
     <Compile Include="RecognitionHandler\FaceRecognizer.cs" />
     <Compile Include="RegistrationActivity.cs" />
@@ -73,6 +77,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
