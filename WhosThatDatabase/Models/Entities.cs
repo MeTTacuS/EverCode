@@ -30,6 +30,7 @@ namespace WhosThatDatabase.Models
     public class SeenUser
     {
         public DateTime DateTime { get; set; }
+        public int SeenUserID { get; set; }
 
         public int WhoSawID { get; set; }
         public virtual WhoSawWho WhoSawWho { get; set; }

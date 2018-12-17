@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Compile Include="Models\HistoryModel.cs" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -94,11 +95,15 @@
     <Compile Include="Context\DatabaseContext.cs" />
     <Compile Include="Controllers\GetPersonController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Controllers\UpvoteController.cs" />
+    <Compile Include="Controllers\WhoSawWhoController.cs" />
+    <Compile Include="Controllers\WhoSawWhoDefaultController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Entities.cs" />
     <Compile Include="Models\RegistrationModel.cs" />
+    <Compile Include="Models\WhoSawWhoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

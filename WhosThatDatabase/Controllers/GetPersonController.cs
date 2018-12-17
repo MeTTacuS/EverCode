@@ -12,7 +12,7 @@ namespace WhosThatDatabase.Controllers
     public class GetPersonController : ApiController
     {
         // GET: api/GetPerson
-        public string Get(int id)//REIKIA SUSIRASTI REIKALINGA ZMOGU DATABASE
+        public string Get(int id) // Returns a persons username by his ID
         {
             using (DatabaseContext db = new DatabaseContext())
             {
