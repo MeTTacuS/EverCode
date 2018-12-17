@@ -2441,8 +2441,8 @@ namespace Appas
 			// aapt resource value: 0x7f08005c
 			public const int action_mode_close_button = 2131230812;
 			
-			// aapt resource value: 0x7f0800c9
-			public const int action_settings = 2131230921;
+			// aapt resource value: 0x7f0800ca
+			public const int action_settings = 2131230922;
 			
 			// aapt resource value: 0x7f0800aa
 			public const int action_text = 2131230890;
@@ -2654,14 +2654,14 @@ namespace Appas
 			// aapt resource value: 0x7f0800a4
 			public const int loginas = 2131230884;
 			
-			// aapt resource value: 0x7f0800c2
-			public const int masked = 2131230914;
+			// aapt resource value: 0x7f0800c3
+			public const int masked = 2131230915;
 			
 			// aapt resource value: 0x7f0800ae
 			public const int media_actions = 2131230894;
 			
-			// aapt resource value: 0x7f0800c0
-			public const int message = 2131230912;
+			// aapt resource value: 0x7f0800c1
+			public const int message = 2131230913;
 			
 			// aapt resource value: 0x7f080031
 			public const int middle = 2131230769;
@@ -2678,23 +2678,23 @@ namespace Appas
 			// aapt resource value: 0x7f080093
 			public const int myphoto = 2131230867;
 			
-			// aapt resource value: 0x7f0800c3
-			public const int nav_camera = 2131230915;
-			
 			// aapt resource value: 0x7f0800c4
-			public const int nav_gallery = 2131230916;
-			
-			// aapt resource value: 0x7f0800c6
-			public const int nav_manage = 2131230918;
-			
-			// aapt resource value: 0x7f0800c8
-			public const int nav_send = 2131230920;
-			
-			// aapt resource value: 0x7f0800c7
-			public const int nav_share = 2131230919;
+			public const int nav_camera = 2131230916;
 			
 			// aapt resource value: 0x7f0800c5
-			public const int nav_slideshow = 2131230917;
+			public const int nav_gallery = 2131230917;
+			
+			// aapt resource value: 0x7f0800c7
+			public const int nav_manage = 2131230919;
+			
+			// aapt resource value: 0x7f0800c9
+			public const int nav_send = 2131230921;
+			
+			// aapt resource value: 0x7f0800c8
+			public const int nav_share = 2131230920;
+			
+			// aapt resource value: 0x7f0800c6
+			public const int nav_slideshow = 2131230918;
 			
 			// aapt resource value: 0x7f08008d
 			public const int nav_view = 2131230861;
@@ -2746,6 +2746,9 @@ namespace Appas
 			
 			// aapt resource value: 0x7f0800bd
 			public const int reg_pass = 2131230909;
+			
+			// aapt resource value: 0x7f0800bf
+			public const int reg_reg = 2131230911;
 			
 			// aapt resource value: 0x7f0800bc
 			public const int reg_user = 2131230908;
@@ -2957,14 +2960,14 @@ namespace Appas
 			// aapt resource value: 0x7f0800a2
 			public const int username = 2131230882;
 			
-			// aapt resource value: 0x7f0800bf
-			public const int usersPhoto = 2131230911;
+			// aapt resource value: 0x7f0800c0
+			public const int usersPhoto = 2131230912;
 			
 			// aapt resource value: 0x7f080016
 			public const int view_offset_helper = 2131230742;
 			
-			// aapt resource value: 0x7f0800c1
-			public const int visible = 2131230913;
+			// aapt resource value: 0x7f0800c2
+			public const int visible = 2131230914;
 			
 			// aapt resource value: 0x7f08003c
 			public const int withText = 2131230780;

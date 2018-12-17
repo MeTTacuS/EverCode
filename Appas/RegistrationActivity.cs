@@ -12,6 +12,7 @@ using Android.Provider;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Appas.APIUtils;
 using Appas.RecognitionHandler;
 
 namespace Appas
@@ -21,6 +22,8 @@ namespace Appas
     {
         int userID = 0;
         bool faceAdded = false;
+        string username;
+        byte[] bitmapData;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -30,9 +33,11 @@ namespace Appas
             var user = FindViewById<EditText>(Resource.Id.reg_user);
             var pass = FindViewById<EditText>(Resource.Id.reg_pass);
             var photoButton = FindViewById<Button>(Resource.Id.takePhoto);
+            var regButton = FindViewById<Button>(Resource.Id.reg_reg);
 
             photoButton.Click += (sender, e) =>
             {
+                username = user.Text;
                 Random random = new Random();
                 userID = random.Next(); // cia turetu buti awaitas su kuriuo sugerenuojam ID
                 if (userID != 0)
@@ -48,6 +53,12 @@ namespace Appas
                 StartActivityForResult(intent, 0);
             };
 
+            regButton.Click += async (sender, e) =>
+            {
+                bool x = await ApiRequestsUtils.RegistratePersonAsync(IDobj.ID, username, bitmapData);
+                Toast.MakeText(ApplicationContext, "registruoju blet, palauk suka  -----------------------------------------------------------------------> " + x, ToastLength.Long).Show();
+
+            };
         }
 
         /* protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
@@ -78,6 +89,14 @@ namespace Appas
         {
             base.OnActivityResult(requestCode, resultCode, data);
             Android.Graphics.Bitmap bitmap = (Bitmap)data.Extras.Get("data");
+            
+            using (var stream = new MemoryStream())
+            {
+                bitmap.Compress(Bitmap.CompressFormat.Png, 0, stream);
+                bitmapData = stream.ToArray();
+            }
+
+
             var recognizer = new FaceRecognizer();
             recognizer.OnFaceAdded += FaceAdded;
             recognizer.CreateFaceLogin(bitmap, userID);

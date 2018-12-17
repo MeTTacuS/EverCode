@@ -21,7 +21,7 @@ namespace Appas.APIUtils
         {
             HttpClient client = new HttpClient();
 
-            string uri = $"{AppSettings.Uri}/api/registration";
+            string uri = $"{AppSettings.Uri}api/registration";
 
             RegistrationRequest person = new RegistrationRequest() { ID = ID, Username = Username, image = image };
 
