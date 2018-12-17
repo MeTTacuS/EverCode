@@ -32,5 +32,10 @@ namespace Appas
                 return "desc";
             }
         }
+
+        public static string Uri { get
+            {
+                return "https://whosthatapi.azurewebsites.net/";
+            } }
     }
 }
