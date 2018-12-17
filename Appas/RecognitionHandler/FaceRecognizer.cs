@@ -488,7 +488,7 @@ namespace Appas.RecognitionHandler
             return sb.ToString().Trim();
         }
 
-        public static async Task<bool> DeletePerson(string personId)
+        public static async Task<bool> DeletePerson(int personId)
         {
             using (var client = new HttpClient())
             {
