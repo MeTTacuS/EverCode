@@ -57,7 +57,45 @@ namespace Appas.APIUtils
 
         }
 
+        public async System.Threading.Tasks.Task<string> GetPersonAsync(int id)
+        {
+            HttpClient client = new HttpClient();
+            string uri = $"{AppSettings.Uri}/api/getperson/{id}";
 
+            StringContent queryString = null;
+            try
+            {
+                queryString = new StringContent(JsonConvert.SerializeObject(id), Encoding.UTF8, "application/json");
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+
+            HttpResponseMessage response;
+
+            response = await client.GetAsync(uri);
+
+            string contentString = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var jsonSerializerSettings = new JsonSerializerSettings();
+                    jsonSerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
+                    var resp = JsonConvert.DeserializeObject<string>(contentString, jsonSerializerSettings);
+
+                    return resp;
+                }
+                catch (Exception e)
+                {
+
+                    return null;
+                }
+            }
+            else { return null; }
+        }
 
     }
 }

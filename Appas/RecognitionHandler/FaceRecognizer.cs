@@ -277,7 +277,7 @@ namespace Appas.RecognitionHandler
             HttpResponseMessage response;
             var detectedFace = new
             {
-                PersonGroupId = 1,
+                PersonGroupId = AppSettings.GroupId,
                 faceIds = new List<String>()
                  {
                      faceId
