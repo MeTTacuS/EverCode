@@ -493,8 +493,9 @@ namespace Appas.RecognitionHandler
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
+                string Id = personId.ToString();
 
-                var uri = $"{uriBase}/persongroups/{AppSettings.GroupId}/persons/{personId}";
+                var uri = $"{uriBase}/persongroups/{AppSettings.GroupId}/persons/{Id}";
 
                 var response = await client.DeleteAsync(uri);
                 if (!response.IsSuccessStatusCode)
