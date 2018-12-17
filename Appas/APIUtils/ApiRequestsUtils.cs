@@ -192,7 +192,31 @@ namespace Appas.APIUtils
             }
         }
 
+        public static async System.Threading.Tasks.Task<List<HistoryModel>> GetLatestHistoryAsync(int id)
+        {
+            HttpClient client = new HttpClient();
+            string uri = $"{AppSettings.Uri}api/whosawwho/{id}";
 
+            HttpResponseMessage response;
+
+            response = await client.GetAsync(uri);
+
+            string contentString = await response.Content.ReadAsStringAsync();
+
+            try
+            {
+                var jsonSerializerSettings = new JsonSerializerSettings();
+                jsonSerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
+                var resp = JsonConvert.DeserializeObject<List<HistoryModel>>(contentString, jsonSerializerSettings);
+
+                return resp;
+            }
+            catch (Exception e)
+            {
+
+                return null;
+            }
+        }
 
     }
 }

@@ -56,6 +56,7 @@ namespace Appas
 
         private void FaceRecognized(object source, FaceRecognizedEventArgs e)
         {
+            IDobj.ID = e.userID;
             var userID = e.userID;
             if (userID != 0)
             {
@@ -72,5 +73,10 @@ namespace Appas
 
 
 
+    }
+
+    static class IDobj
+    {
+        public static int ID { get; set; }
     }
 }
