@@ -277,7 +277,7 @@ namespace Appas.RecognitionHandler
             HttpResponseMessage response;
             var detectedFace = new
             {
-                PersonGroupId = 1,
+                PersonGroupId = AppSettings.GroupId,
                 faceIds = new List<String>()
                  {
                      faceId
@@ -488,22 +488,24 @@ namespace Appas.RecognitionHandler
             return sb.ToString().Trim();
         }
 
-        public static async Task<bool> DeletePerson(string personGroupId, string personId)
+        public static async Task<string> DeletePerson(int personId)
         {
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
+                string Id = personId.ToString();
 
-                var uri = $"{uriBase}/persongroups/{AppSettings.GroupId}/persons/{personId}";
+                var uri = $"{uriBase}persongroups/{AppSettings.GroupId}/persons/{Id}";
 
                 var response = await client.DeleteAsync(uri);
                 if (!response.IsSuccessStatusCode)
                 {
+                    
                     var errorText = await response.Content.ReadAsStringAsync();
-                    return false;
+                    var errorResponse = JsonConvert.DeserializeObject<FaceApiErrorResponse>(errorText);
+                    return errorResponse.Error.Message;
                 }
-
-                return response.IsSuccessStatusCode;
+                return null;
             }
         }
     }
