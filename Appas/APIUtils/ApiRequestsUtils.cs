@@ -17,13 +17,13 @@ namespace Appas.APIUtils
 {
     class ApiRequestsUtils
     {
-        public async System.Threading.Tasks.Task<bool> RegistratePersonAsync (string Username, string Password, string FaceId, byte[] image)
+        public async System.Threading.Tasks.Task<bool> RegistratePersonAsync (string Username, string Password, byte[] image)
         {
             HttpClient client = new HttpClient();
 
             string uri = $"{AppSettings.Uri}/api/registration";
 
-            RegistrationRequest person = new RegistrationRequest() { Username = Username, Password = Password, PersistedFaceId = FaceId, image=image };
+            RegistrationRequest person = new RegistrationRequest() { Username = Username, Password = Password, image=image };
 
             StringContent queryString = null;
             try
@@ -46,8 +46,6 @@ namespace Appas.APIUtils
                 var jsonSerializerSettings = new JsonSerializerSettings();
                 jsonSerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
                 var resp = JsonConvert.DeserializeObject<bool>(contentString, jsonSerializerSettings);
-
-                
 
                 return resp;
             }
