@@ -11,7 +11,6 @@ using Android.Provider;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Appas.RecognitionGandler;
 using Appas.RecognitionHandler;
 
 namespace Appas
