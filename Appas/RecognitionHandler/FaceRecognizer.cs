@@ -487,5 +487,24 @@ namespace Appas.RecognitionHandler
 
             return sb.ToString().Trim();
         }
+
+        public static async Task<bool> DeletePerson(string personGroupId, string personId)
+        {
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
+
+                var uri = $"{uriBase}/persongroups/{AppSettings.GroupId}/persons/{personId}";
+
+                var response = await client.DeleteAsync(uri);
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorText = await response.Content.ReadAsStringAsync();
+                    return false;
+                }
+
+                return response.IsSuccessStatusCode;
+            }
+        }
     }
 }
