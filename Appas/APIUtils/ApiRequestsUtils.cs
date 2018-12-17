@@ -87,6 +87,7 @@ namespace Appas.APIUtils
             else { return null; }
         }
 
+        #region upvotes
         public static async System.Threading.Tasks.Task<bool> AddUpvoteAsync(int id)
         {
             HttpClient client = new HttpClient();
@@ -150,11 +151,13 @@ namespace Appas.APIUtils
             }
         }
 
+        #endregion
+
         public static async System.Threading.Tasks.Task<bool> AddWhoSawWhoAsync(int WhoSawID, int WasSeenID, DateTime date)
         {
             HttpClient client = new HttpClient();
 
-            string uri = $"{AppSettings.Uri}/api/registration";
+            string uri = $"{AppSettings.Uri}/api/whosawwho";
 
             WhoSawWhoRequest model = new WhoSawWhoRequest() { WhoSawID = WhoSawID, WasSeenID = WasSeenID, Date = date };
 
