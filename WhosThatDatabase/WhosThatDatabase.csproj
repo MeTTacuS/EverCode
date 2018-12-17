@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Compile Include="Controllers\testController.cs" />
     <Compile Include="Models\HistoryModel.cs" />
     <Content Include="Web.config" />
   </ItemGroup>

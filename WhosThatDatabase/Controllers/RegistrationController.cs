@@ -12,9 +12,9 @@ namespace WhosThatDatabase.Controllers
     public class RegistrationController : ApiController
     {
         // POST: api/Registration
-        public bool Post(RegistrationModel model)
+        public bool Post([FromBody]RegistrationModel model)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || model == null)
                 return false;
             using (DatabaseContext db = new DatabaseContext())
             {

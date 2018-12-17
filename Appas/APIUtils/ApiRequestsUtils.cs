@@ -28,10 +28,13 @@ namespace Appas.APIUtils
             StringContent queryString = null;
             try
             {
+                Console.WriteLine("Prieitas pirmas patikrinimas");
                 queryString = new StringContent(JsonConvert.SerializeObject(person), Encoding.UTF8, "application/json");
+                Console.WriteLine("PRAEITAS pirmas patikrinimas");
             }
             catch (Exception e)
             {
+                
                 return false;
             }
 
@@ -43,10 +46,11 @@ namespace Appas.APIUtils
 
             try
             {
+                Console.WriteLine("prieitas antras patikrinimas");
                 var jsonSerializerSettings = new JsonSerializerSettings();
                 jsonSerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
                 var resp = JsonConvert.DeserializeObject<bool>(contentString, jsonSerializerSettings);
-
+                Console.WriteLine("PRAEITAS antras patikrinimas");
                 return resp;
             }
             catch (Exception e)

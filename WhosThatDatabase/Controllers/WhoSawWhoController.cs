@@ -12,7 +12,7 @@ namespace WhosThatDatabase.Controllers
     public class WhoSawWhoController : ApiController // Requires WhoSawID, WhoWasSeenID, Date
     {
         // POST: api/WhoSawWho
-        public bool Post(WhoSawWhoModel model)
+        public bool Post([FromBody]WhoSawWhoModel model)
         {
             if (!ModelState.IsValid)
                 return false;
