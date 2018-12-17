@@ -20,7 +20,6 @@ namespace WhosThatDatabase.Models
         public int ID { get; set; }
         public int Points { get; set; }
         public byte[] ImageByteArray { get; set; }
-        public string RecognitionID { get; set; }
     }
 
     public class WhoSawWho

@@ -19,18 +19,15 @@ namespace WhosThatDatabase.Controllers
             using (DatabaseContext db = new DatabaseContext())
             {
                 LoginInfo newLogin = new LoginInfo();
+                newLogin.ID = model.ID;
                 newLogin.Password = model.Password;
                 newLogin.Username = model.Username;
-
                 UserInfo newUser = new UserInfo();
                 newUser.Points = 0;
                 newUser.ImageByteArray = model.ImageByteArray;
-                newUser.RecognitionID = model.RecognitionID;
+                newUser.ID = model.ID;
 
                 db.LoginInfos.Add(newLogin);
-                db.SaveChanges();
-
-                newUser.ID = newLogin.ID;
                 db.UserInfos.Add(newUser);
                 db.SaveChanges();
                 return true;
