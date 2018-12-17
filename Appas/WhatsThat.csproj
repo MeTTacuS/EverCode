@@ -58,19 +58,28 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Acount.cs" />
+    <Compile Include="APIUtils\ApiRequestsUtils.cs" />
+    <Compile Include="AppSettings.cs" />
     <Compile Include="Fragments\DemoFragment.cs" />
     <Compile Include="Fragments\DemoFragment2.cs" />
     <Compile Include="Fragments\PersonFragment.cs" />
     <Compile Include="GalleryActivity.cs" />
     <Compile Include="LoginActivity.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="Person.cs" />
+    <Compile Include="Model\DetectedFace.cs" />
+    <Compile Include="Model\IdentifiedFace.cs" />
+    <Compile Include="Model\Person.cs" />
+    <Compile Include="Model\PersonGroupCreateRequest.cs" />
+    <Compile Include="Model\PersonGroupGetResponse.cs" />
+    <Compile Include="RecognitionHandler\FaceRecognizedEvent.cs" />
+    <Compile Include="RecognitionHandler\FaceRecognizer.cs" />
     <Compile Include="RegistrationActivity.cs" />
+    <Compile Include="Request Models\RegistrationRequest.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
@@ -123,6 +132,9 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_round.png" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2.1" />
   </ItemGroup>
   <ItemGroup>

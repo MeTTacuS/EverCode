@@ -10,9 +10,12 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace Appas
+namespace Appas.Request_Models
 {
-    class Acount
+    class RegistrationRequest
     {
+        public int ID { get; set; }
+        public string Username { get; set; }
+        public byte[] image { get; set; }
     }
 }
