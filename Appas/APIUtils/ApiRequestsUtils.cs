@@ -87,7 +87,7 @@ namespace Appas.APIUtils
             else { return null; }
         }
 
-        public async System.Threading.Tasks.Task<bool> UpvoteAsync(int id)
+        public async System.Threading.Tasks.Task<bool> AddUpvoteAsync(int id)
         {
             HttpClient client = new HttpClient();
             string uri = $"{AppSettings.Uri}/api/upvote";
