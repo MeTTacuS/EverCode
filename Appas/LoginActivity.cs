@@ -5,10 +5,14 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
+using Android.Provider;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Appas.RecognitionGandler;
+using Appas.RecognitionHandler;
 
 namespace Appas
 {
@@ -31,15 +35,43 @@ namespace Appas
                 StartActivity(typeof(RegistrationActivity));
             };
 
-            loginas.Click += delegate
-            {
-                // cia perduodami duomenys
-                // poto prisijungiam jei geri duomenys
-                if (true)
-                {
-                    StartActivity(typeof(MainActivity));
-                }
-            };
+            loginas.Click += OnRecognizeClick;
         }
+
+        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            Android.Graphics.Bitmap bitmap = (Bitmap)data.Extras.Get("data");
+            var recognizer = new FaceRecognizer();
+            recognizer.OnRecognized += FaceRecognized;
+            recognizer.RecognizeFace(bitmap);
+        }
+
+
+        private void OnRecognizeClick(object sender, EventArgs e)
+        {
+            Intent intent = new Intent(MediaStore.ActionImageCapture);
+            StartActivityForResult(intent, 0);
+        }
+
+
+        private void FaceRecognized(object source, FaceRecognizedEventArgs e)
+        {
+            var userID = e.userID;
+            if (userID != 0)
+            {
+                Toast.MakeText(ApplicationContext, "Face recognized, ID:" + userID, ToastLength.Long).Show();
+                var act = new Intent(this, typeof(MainActivity));
+                act.PutExtra("UserID", userID.ToString());
+                StartActivity(act);
+            }
+            else
+            {
+                Toast.MakeText(ApplicationContext, "Face recognition failed", ToastLength.Long).Show();
+            }
+        }
+
+
+
     }
 }
