@@ -14,8 +14,8 @@ namespace Appas.Request_Models
 {
     class RegistrationRequest
     {
+        public int ID { get; set; }
         public string Username { get; set; }
-        public string Password {get; set;}
         public byte[] image { get; set; }
     }
 }

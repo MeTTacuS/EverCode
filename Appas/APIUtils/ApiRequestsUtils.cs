@@ -17,13 +17,13 @@ namespace Appas.APIUtils
 {
     class ApiRequestsUtils
     {
-        public async System.Threading.Tasks.Task<bool> RegistratePersonAsync (string Username, string Password, byte[] image)
+        public async System.Threading.Tasks.Task<bool> RegistratePersonAsync (int ID, string Username, byte[] image)
         {
             HttpClient client = new HttpClient();
 
             string uri = $"{AppSettings.Uri}/api/registration";
 
-            RegistrationRequest person = new RegistrationRequest() { Username = Username, Password = Password, image=image };
+            RegistrationRequest person = new RegistrationRequest() {ID=ID, Username = Username, image=image };
 
             StringContent queryString = null;
             try
