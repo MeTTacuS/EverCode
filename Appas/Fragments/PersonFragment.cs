@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using Appas.RecognitionHandler;
 
 namespace Appas.Fragments
 {
@@ -25,12 +26,13 @@ namespace Appas.Fragments
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            View view = inflater.Inflate(Resource.Layout.person_layout, container, false);
+            View view = inflater.Inflate(Resource.Layout.account_layout, container, false);
             Button delete = view.FindViewById<Button>(Resource.Id.DeleteButton);
 
-            delete.Click += delegate
+            delete.Click += async (sender, e) =>
             {
-                int a = IDobj.ID;
+                bool x = await FaceRecognizer.DeletePerson(IDobj.ID);
+                Console.WriteLine("AR METODAS MAN PAVYKO " + x);
             };
 
             return view;
