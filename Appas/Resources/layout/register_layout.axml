@@ -7,12 +7,6 @@
 	android:paddingLeft = "24dp"
 	android:paddingRight = "24dp">
 
-	<Button
-		android:id="@+id/goBack"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="Back"/>
-
 	<EditText
 		android:id="@+id/reg_user"
 		android:layout_width="match_parent"
@@ -33,12 +27,6 @@
 	android:orientation="horizontal"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content">
-
-		<Button
-		android:id="@+id/idGeneration"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="GENERATE ID"/>
 
 		<Button
 		android:id="@+id/takePhoto"

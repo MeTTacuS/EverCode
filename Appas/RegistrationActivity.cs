@@ -29,48 +29,30 @@ namespace Appas
 
             var user = FindViewById<EditText>(Resource.Id.reg_user);
             var pass = FindViewById<EditText>(Resource.Id.reg_pass);
-            var idButton = FindViewById<Button>(Resource.Id.idGeneration);
             var photoButton = FindViewById<Button>(Resource.Id.takePhoto);
             var confirmButton = FindViewById<Button>(Resource.Id.confirmReg);
-            var backButton = FindViewById<Button>(Resource.Id.goBack);
-
-            idButton.Click += RegisterClickedEventHandler;
-
-            backButton.Click += delegate
-            {
-                StartActivity(typeof(LoginActivity));
-            };
 
             confirmButton.Click += delegate
             {
-                //cia suinciam IPA data
-                //po to prisijungiam
                 StartActivity(typeof(MainActivity));
             };
 
             photoButton.Click += (sender, e) =>
             {
+                userID = 1; // cia turetu buti awaitas su kuriuo sugerenuojam ID
+
+                if (userID != 0)
+                {
+                    Toast.MakeText(ApplicationContext, userID.ToString() + "ID generated, add your face!", ToastLength.Long).Show();
+                }
+                else
+                {
+                    Toast.MakeText(ApplicationContext, "nesugeneravau, eik tu namas!!!", ToastLength.Long).Show();
+                }
+
                 Intent intent = new Intent(MediaStore.ActionImageCapture);
                 StartActivityForResult(intent, 0);
             };
-
-        }
-
-        async void RegisterClickedEventHandler(object sender, EventArgs e)
-        {
-            Toast.MakeText(ApplicationContext, "generuoju nx, palauk", ToastLength.Long).Show();
-            userID = 1; // cia turetu buti awaitas su kuriuo sugerenuojam ID
-
-            Toast.MakeText(ApplicationContext, userID.ToString(), ToastLength.Long).Show();
-
-            if (userID != 0)
-            {
-                Toast.MakeText(ApplicationContext, "Email registered, now add your face!", ToastLength.Long).Show();
-            }
-            else
-            {
-                Toast.MakeText(ApplicationContext, "nesugeneravau, eik tu namas!!!", ToastLength.Long).Show();
-            }
 
         }
 
@@ -103,11 +85,9 @@ namespace Appas
             base.OnActivityResult(requestCode, resultCode, data);
             Android.Graphics.Bitmap bitmap = (Bitmap)data.Extras.Get("data");
             var recognizer = new FaceRecognizer();
-            Toast.MakeText(ApplicationContext, "iki cia veikia", ToastLength.Short).Show();
             recognizer.OnFaceAdded += FaceAdded;
             recognizer.CreateFaceLogin(bitmap, userID);
             faceAdded = true;
-            Toast.MakeText(ApplicationContext, "iki cia veikia taip pat", ToastLength.Short).Show();
         }
 
         private void FaceAdded(object source, FaceAddedEventArgs e)
