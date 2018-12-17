@@ -277,7 +277,7 @@ namespace Appas.RecognitionHandler
             HttpResponseMessage response;
             var detectedFace = new
             {
-                PersonGroupId = 1,
+                PersonGroupId = AppSettings.GroupId,
                 faceIds = new List<String>()
                  {
                      faceId
@@ -488,7 +488,7 @@ namespace Appas.RecognitionHandler
             return sb.ToString().Trim();
         }
 
-        public static async Task<bool> DeletePerson(string personGroupId, string personId)
+        public static async Task<bool> DeletePerson(int personId)
         {
             using (var client = new HttpClient())
             {
