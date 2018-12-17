@@ -10,9 +10,13 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace Appas
+namespace Appas.Model
 {
-    class Acount
+    class Person
     {
+        public string personId;
+        public List<string> persistedFaceIds;
+        public string name;
+        public string userData;
     }
 }
