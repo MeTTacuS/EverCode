@@ -57,8 +57,6 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Acount.cs" />
-    <Compile Include="APIUtils\ApiRequestsUtils.cs" />
     <Compile Include="AppSettings.cs" />
     <Compile Include="Fragments\DemoFragment.cs" />
     <Compile Include="Fragments\DemoFragment2.cs" />
@@ -74,7 +72,6 @@
     <Compile Include="RecognitionHandler\FaceRecognizedEvent.cs" />
     <Compile Include="RecognitionHandler\FaceRecognizer.cs" />
     <Compile Include="RegistrationActivity.cs" />
-    <Compile Include="Request Models\RegistrationRequest.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
