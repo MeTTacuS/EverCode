@@ -97,5 +97,43 @@ namespace Appas.APIUtils
             else { return null; }
         }
 
+        public async System.Threading.Tasks.Task<bool> UpvoteAsync(int id)
+        {
+            HttpClient client = new HttpClient();
+            string uri = $"{AppSettings.Uri}/api/upvote";
+
+            StringContent queryString = null;
+            try
+            {
+                queryString = new StringContent(JsonConvert.SerializeObject(id), Encoding.UTF8, "application/json");
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+            HttpResponseMessage response;
+
+            response = await client.PostAsync(uri, queryString);
+
+            string contentString = await response.Content.ReadAsStringAsync();
+
+            try
+            {
+                var jsonSerializerSettings = new JsonSerializerSettings();
+                jsonSerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
+                var resp = JsonConvert.DeserializeObject<bool>(contentString, jsonSerializerSettings);
+
+                return resp;
+            }
+            catch (Exception e)
+            {
+
+                return false;
+            }
+
+        }
+
+
     }
 }
