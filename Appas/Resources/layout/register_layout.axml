@@ -34,15 +34,6 @@
 		android:layout_height="wrap_content"
 		android:text="Take photo"/>	
 
-		<Button
-		android:id="@+id/confirmReg"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="register"
-		android:background="#FF0000"
-		android:textColor="#FFF"/>
-		
-
 		</LinearLayout>
 	
 

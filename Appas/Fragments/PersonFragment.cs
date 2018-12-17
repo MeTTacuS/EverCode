@@ -26,8 +26,13 @@ namespace Appas.Fragments
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             View view = inflater.Inflate(Resource.Layout.person_layout, container, false);
+            Button delete = view.FindViewById<Button>(Resource.Id.DeleteButton);
 
-            
+            delete.Click += delegate
+            {
+                int a = IDobj.ID;
+            };
+
             return view;
         }
     }

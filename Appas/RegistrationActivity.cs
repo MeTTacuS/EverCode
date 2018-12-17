@@ -30,17 +30,11 @@ namespace Appas
             var user = FindViewById<EditText>(Resource.Id.reg_user);
             var pass = FindViewById<EditText>(Resource.Id.reg_pass);
             var photoButton = FindViewById<Button>(Resource.Id.takePhoto);
-            var confirmButton = FindViewById<Button>(Resource.Id.confirmReg);
-
-            confirmButton.Click += delegate
-            {
-                StartActivity(typeof(MainActivity));
-            };
 
             photoButton.Click += (sender, e) =>
             {
-                userID = 1; // cia turetu buti awaitas su kuriuo sugerenuojam ID
-
+                Random random = new Random();
+                userID = random.Next(); // cia turetu buti awaitas su kuriuo sugerenuojam ID
                 if (userID != 0)
                 {
                     Toast.MakeText(ApplicationContext, userID.ToString() + "ID generated, add your face!", ToastLength.Long).Show();
