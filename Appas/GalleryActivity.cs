@@ -20,12 +20,9 @@ namespace Appas
         const int RequestLocationId = 0;
 
         readonly string[] PermissionsGroupLocation =
-            {
-                            //TODO add more permissions
-                      //      Android.Manifest.Permission.AccessCoarseLocation,
-                       //     Android.Manifest.Permission.AccessFineLocation,
-                            Android.Manifest.Permission.Camera
-             };
+        {
+            Android.Manifest.Permission.Camera
+        };
 
         ImageView imageView;
         Button _openCamera;
