@@ -20,7 +20,6 @@ namespace WhosThatDatabase.Controllers
             {
                 LoginInfo newLogin = new LoginInfo();
                 newLogin.ID = model.ID;
-                newLogin.Password = model.Password;
                 newLogin.Username = model.Username;
                 UserInfo newUser = new UserInfo();
                 newUser.Points = 0;
