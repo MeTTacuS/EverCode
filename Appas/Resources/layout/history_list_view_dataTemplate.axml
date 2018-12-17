@@ -17,5 +17,10 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:id="@+id/dateTextView" />
-
+	<TextView
+		android:text="Vote"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/voteTextView" />
 </LinearLayout>

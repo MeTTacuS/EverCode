@@ -17,5 +17,6 @@ namespace Appas
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime Date { get; set; }
+        public int Vote { get; set; }
     }
 }

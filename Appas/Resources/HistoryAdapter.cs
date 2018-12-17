@@ -18,6 +18,7 @@ namespace Appas.Resources
     {
         public TextView txtName { get; set; }
         public TextView txtDate { get; set; }
+        public TextView txtVote { get; set; }
     }
 
     public class HistoryAdapter : BaseAdapter
@@ -54,9 +55,11 @@ namespace Appas.Resources
             var view = convertView ?? _fragment.LayoutInflater.Inflate(Resource.Layout.history_list_view_dataTemplate, parent, false);
             var txtName = view.FindViewById<TextView>(Resource.Id.nameTextView);
             var txtDate = view.FindViewById<TextView>(Resource.Id.dateTextView);
+            var txtVote = view.FindViewById<TextView>(Resource.Id.voteTextView);
 
             txtName.Text = _history[position].Name;
             txtDate.Text = _history[position].Date.ToString();
+            txtVote.Text = _history[position].Vote.ToString();
 
             return view;
         }
