@@ -153,7 +153,7 @@ namespace Appas.APIUtils
 
         #endregion
 
-        public static async System.Threading.Tasks.Task<int> AddWhoSawWhoAsync(int WhoSawID, int WasSeenID, DateTime date)
+        public static async System.Threading.Tasks.Task<int> AddWhoSawWhoAsync(int WhoSawID, int WasSeenID, string date)
         {
             HttpClient client = new HttpClient();
 
