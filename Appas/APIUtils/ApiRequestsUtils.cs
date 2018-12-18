@@ -153,7 +153,7 @@ namespace Appas.APIUtils
 
         #endregion
 
-        public static async System.Threading.Tasks.Task<int> AddWhoSawWhoAsync(int WhoSawID, int WasSeenID, string date)
+        public static async System.Threading.Tasks.Task<bool> AddWhoSawWhoAsync(int WhoSawID, int WasSeenID, string date)
         {
             HttpClient client = new HttpClient();
 
@@ -171,7 +171,7 @@ namespace Appas.APIUtils
             catch (Exception e)
             {
                 Console.WriteLine("*********00******************999999999999999999999999999999999999**********************************************88*** -1");
-                return -1;
+                return false;
             }
 
             HttpResponseMessage response;
@@ -184,7 +184,7 @@ namespace Appas.APIUtils
             {
                 var jsonSerializerSettings = new JsonSerializerSettings();
                 jsonSerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
-                var resp = JsonConvert.DeserializeObject<int>(contentString, jsonSerializerSettings);
+                var resp = JsonConvert.DeserializeObject<bool>(contentString, jsonSerializerSettings);
 
                 Console.WriteLine("*********00********************************************************************************************88***" + resp);
                 return resp;
@@ -192,14 +192,14 @@ namespace Appas.APIUtils
             catch (Exception e)
             {
                 Console.WriteLine("*********00***************************55555555555555555555555555555555555*************************************88***");
-                return -1;
+                return false;
             }
         }
 
         public static async System.Threading.Tasks.Task<List<HistoryModel>> GetLatestHistoryAsync(int id)
         {
             HttpClient client = new HttpClient();
-            string uri = $"{AppSettings.Uri}api/whosawwho/{id}";
+            string uri = $"{AppSettings.Uri}api/whosawwhodefault/{id}";
 
             HttpResponseMessage response;
 
