@@ -13,12 +13,14 @@ using Android.Widget;
 using Appas.Resources;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
+using Appas.APIUtils;
+using Appas.Request_Models;
 
 namespace Appas.Fragments
 {
     public class HistoryFragment : Android.Support.V4.App.Fragment
     {
-        List<History> lstSource = new List<History>();
+        List<HistoryModel> lstSource = new List<HistoryModel>();
         ListView lstData;
 
         public override void OnCreate(Bundle savedInstanceState)
@@ -69,26 +71,39 @@ namespace Appas.Fragments
                 _endDate = e.Date;
             }
 
-            showHistoryBtn.Click += delegate
+            showHistoryBtn.Click += async delegate
             {
                 // List<History> lstSource = new List<History>();
                 lstSource.Clear();
-
-                for (int i = 0; i < 20; i++)
+                try
                 {
-                    History dataCs = new History()
+lstSource = await ApiRequestsUtils.GetLatestHistoryAsync(IDobj.ID);
+
+                }
+                catch(Exception e)
+                {
+
+                }
+
+              //  for (int i = 0; i < 3; i++)
+               // {
+
+                /*    History dataCs = new History()
                     {
                         Id = i,
                         Name = "abcde" + i,
                         Date = DateTime.Parse("2018-12-05").AddDays(i),
                         Vote = i
-                    };
-                       if (dataCs.Date >= _startDate && dataCs.Date <= _endDate)
-                    lstSource.Add(dataCs);
-                }
-
-                var adapter = new HistoryAdapter(this, lstSource);
+                    };*/
+                   //    if (dataCs.Date >= _startDate && dataCs.Date <= _endDate)
+                   // lstSource.Add(dataCs);
+                //}
+                if(lstSource != null)
+                {
+var adapter = new HistoryAdapter(this, lstSource);
                 lstData.Adapter = adapter;
+                }
+                
             };
 
             lstData.ItemClick += mListView_ItemClick;
@@ -99,8 +114,8 @@ namespace Appas.Fragments
 
         private void mListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)       
         {
-            Toast.MakeText(this.Activity, lstSource[e.Position].Vote.ToString(), ToastLength.Short).Show();
-            lstSource[e.Position].Vote += 1;
+            Toast.MakeText(this.Activity, lstSource[e.Position].points.ToString(), ToastLength.Short).Show();
+            lstSource[e.Position].points += 1;
             var adapter = new HistoryAdapter(this, lstSource);
                 lstData.Adapter = adapter;
         }

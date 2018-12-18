@@ -78,6 +78,7 @@ namespace Appas
                     var recognizer = new FaceRecognizer();
                     recognizer.OnRecognized += FaceRecognized;
                     recognizer.RecognizeFace(bitmap);
+
                 }
                 catch (Exception e) { }
             }
