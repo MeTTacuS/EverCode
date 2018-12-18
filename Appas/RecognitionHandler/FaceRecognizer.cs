@@ -254,7 +254,9 @@ namespace Appas.RecognitionHandler
                     name = string.Empty
                 };
                 var resp = JsonConvert.DeserializeObject<Person>(contentString, jsonSerializerSettings);
+
                 int id =  Int32.Parse(resp.name.ToString());
+                Console.WriteLine("*********************************************************************************************************************" + resp.name);
                 //Toast.MakeText(AuthServiceRequests.context, id.ToString(), ToastLength.Long).Show();
                 return id;
             }
@@ -495,7 +497,7 @@ namespace Appas.RecognitionHandler
                 client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
                 string Id = personId.ToString();
 
-                var uri = $"{uriBase}persongroups/{AppSettings.GroupId}/persons/{Id}";
+                string uri = $"{uriBase}persongroups/{AppSettings.GroupId}/persons/{Id}";
 
                 var response = await client.DeleteAsync(uri);
                 if (!response.IsSuccessStatusCode)
