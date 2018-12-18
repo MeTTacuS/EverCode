@@ -25,11 +25,6 @@ namespace WhosThatDatabase.Controllers
                 var result = db.WhoSawWho.First(a => a.WhoSawID == id);
                 if (result != null)
                 {
-                    //var usersList = db.SeenUsers
-                    //    .OrderByDescending(a => a.DateTime)
-                    //    .Where(a => a.WhoSawID == result.WhoSawID)
-                    //    .Take(3).ToList();
-
                     var list = (from l in db.UserInfos
                                 join e in db.LoginInfos on l.ID equals e.ID
                                 where e.ID == id
