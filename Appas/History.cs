@@ -10,11 +10,13 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace Appas.Request_Models
+namespace Appas
 {
-    class RegistrationRequest
+    public class History
     {
-        public string Username { get; set; }
-        public byte[] image { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public DateTime Date { get; set; }
+        public int points { get; set; }
     }
 }

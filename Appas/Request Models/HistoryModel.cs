@@ -12,10 +12,10 @@ using Android.Widget;
 
 namespace Appas.Request_Models
 {
-    class HistoryModel
+    public class HistoryModel
     {
         public string Username { get; set; }
-        public DateTime date { get; set; }
+        public string date { get; set; }
         public int points { get; set; }
         public int ID { get; set; }
     }

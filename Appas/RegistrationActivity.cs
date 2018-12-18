@@ -24,14 +24,15 @@ namespace Appas
         bool faceAdded = false;
         string username;
         byte[] bitmapData;
-
+        EditText pass;
+        Android.Graphics.Bitmap bitmap;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.register_layout);
 
             var user = FindViewById<EditText>(Resource.Id.reg_user);
-            var pass = FindViewById<EditText>(Resource.Id.reg_pass);
+            pass = FindViewById<EditText>(Resource.Id.reg_pass);
             var photoButton = FindViewById<Button>(Resource.Id.takePhoto);
             var regButton = FindViewById<Button>(Resource.Id.reg_reg);
 
@@ -39,14 +40,14 @@ namespace Appas
             {
                 username = user.Text;
                 Random random = new Random();
-                userID = random.Next(); // cia turetu buti awaitas su kuriuo sugerenuojam ID
+                //userID = random.Next(); // cia turetu buti awaitas su kuriuo sugerenuojam ID
                 if (userID != 0)
                 {
                     Toast.MakeText(ApplicationContext, userID.ToString() + "ID generated, add your face!", ToastLength.Long).Show();
                 }
                 else
                 {
-                    Toast.MakeText(ApplicationContext, "nesugeneravau, eik tu namas!!!", ToastLength.Long).Show();
+                    //Toast.MakeText(ApplicationContext, "nesugeneravau, eik tu namas!!!", ToastLength.Long).Show();
                 }
 
                 Intent intent = new Intent(MediaStore.ActionImageCapture);
@@ -55,10 +56,15 @@ namespace Appas
 
             regButton.Click += async (sender, e) =>
             {
-                Console.WriteLine("toastas parodo zinute");
-                bool x = await ApiRequestsUtils.RegistratePersonAsync(IDobj.ID, username, bitmapData);
-                Toast.MakeText(ApplicationContext, "registruoju, palauk   ---------------------------------> " + x, ToastLength.Long).Show();
+                int userID = await ApiRequestsUtils.RegistratePersonAsync(username, bitmapData);
+                //Toast.MakeText(ApplicationContext, "registruoju blet, palauk suka  -----------------------------------------------------------------------> " + x, ToastLength.Short).Show();
+                pass.Text = userID.ToString();
+                Toast.MakeText(ApplicationContext, userID.ToString() + "ID yra -------------------------------------------!" + userID, ToastLength.Long).Show();
 
+                var recognizer = new FaceRecognizer();
+                recognizer.OnFaceAdded += FaceAdded;
+                recognizer.CreateFaceLogin(bitmap, userID);
+                faceAdded = true;
             };
         }
 
@@ -89,7 +95,7 @@ namespace Appas
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
-            Android.Graphics.Bitmap bitmap = (Bitmap)data.Extras.Get("data");
+            bitmap = (Bitmap)data.Extras.Get("data");
             
             using (var stream = new MemoryStream())
             {
@@ -97,11 +103,6 @@ namespace Appas
                 bitmapData = stream.ToArray();
             }
 
-
-            var recognizer = new FaceRecognizer();
-            recognizer.OnFaceAdded += FaceAdded;
-            recognizer.CreateFaceLogin(bitmap, userID);
-            faceAdded = true;
         }
 
         private void FaceAdded(object source, FaceAddedEventArgs e)

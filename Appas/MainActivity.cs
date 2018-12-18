@@ -16,7 +16,7 @@ namespace Appas
     public class MainActivity : AppCompatActivity, NavigationView.IOnNavigationItemSelectedListener
     {
         private Fragments.DemoFragment demo;
-        private Fragments.DemoFragment2 demo2;
+        private Fragments.HistoryFragment demo2;
         private Fragments.PersonFragment person;
         private SupportFragment currentFragment;
 
@@ -55,7 +55,7 @@ namespace Appas
 
             var transaction = SupportFragmentManager.BeginTransaction();
             demo = new Fragments.DemoFragment();
-            demo2 = new Fragments.DemoFragment2();
+            demo2 = new Fragments.HistoryFragment();
             person = new Fragments.PersonFragment();
             currentFragment = demo;
 

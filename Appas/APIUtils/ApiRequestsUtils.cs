@@ -17,13 +17,13 @@ namespace Appas.APIUtils
 {
     class ApiRequestsUtils
     {
-        public static async System.Threading.Tasks.Task<bool> RegistratePersonAsync(int ID, string Username, byte[] image)
+        public static async System.Threading.Tasks.Task<int> RegistratePersonAsync(string Username, byte[] image)
         {
             HttpClient client = new HttpClient();
 
             string uri = $"{AppSettings.Uri}api/registration";
 
-            RegistrationRequest person = new RegistrationRequest() { ID = ID, Username = Username, image = image };
+            RegistrationRequest person = new RegistrationRequest() {Username = Username, image = image };
 
             StringContent queryString = null;
             try
@@ -34,8 +34,7 @@ namespace Appas.APIUtils
             }
             catch (Exception e)
             {
-                
-                return false;
+                return e.HResult;
             }
 
             HttpResponseMessage response;
@@ -49,14 +48,14 @@ namespace Appas.APIUtils
                 Console.WriteLine("prieitas antras patikrinimas");
                 var jsonSerializerSettings = new JsonSerializerSettings();
                 jsonSerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
-                var resp = JsonConvert.DeserializeObject<bool>(contentString, jsonSerializerSettings);
-                Console.WriteLine("PRAEITAS antras patikrinimas");
+                var resp = JsonConvert.DeserializeObject<int>(contentString, jsonSerializerSettings);
+
                 return resp;
             }
             catch (Exception e)
             {
 
-                return false;
+                return e.HResult;
             }
 
         }
@@ -157,7 +156,7 @@ namespace Appas.APIUtils
 
         #endregion
 
-        public static async System.Threading.Tasks.Task<bool> AddWhoSawWhoAsync(int WhoSawID, int WasSeenID, DateTime date)
+        public static async System.Threading.Tasks.Task<bool> AddWhoSawWhoAsync(int WhoSawID, int WasSeenID, string date)
         {
             HttpClient client = new HttpClient();
 
@@ -169,6 +168,7 @@ namespace Appas.APIUtils
             try
             {
                 queryString = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+
             }
             catch (Exception e)
             {
@@ -180,18 +180,17 @@ namespace Appas.APIUtils
             response = await client.PostAsync(uri, queryString);
 
             string contentString = await response.Content.ReadAsStringAsync();
-
             try
             {
                 var jsonSerializerSettings = new JsonSerializerSettings();
                 jsonSerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
                 var resp = JsonConvert.DeserializeObject<bool>(contentString, jsonSerializerSettings);
 
+                Console.WriteLine("*********00********************************************************************************************88***" + resp);
                 return resp;
             }
             catch (Exception e)
             {
-
                 return false;
             }
         }
@@ -199,7 +198,7 @@ namespace Appas.APIUtils
         public static async System.Threading.Tasks.Task<List<HistoryModel>> GetLatestHistoryAsync(int id)
         {
             HttpClient client = new HttpClient();
-            string uri = $"{AppSettings.Uri}api/whosawwho/{id}";
+            string uri = $"{AppSettings.Uri}api/whosawwhodefault/{id}";
 
             HttpResponseMessage response;
 
