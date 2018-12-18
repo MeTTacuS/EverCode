@@ -12,14 +12,14 @@ namespace WhosThatDatabase.Controllers
     public class WhoSawWhoController : ApiController // Requires WhoSawID, WhoWasSeenID, Date
     {
         // POST: api/WhoSawWho
-        public bool Post([FromBody]WhoSawWhoModel model)
+        public int Post(WhoSawWhoModel model)
         {
-            if (!ModelState.IsValid)
-                return false;
+            //if (!ModelState.IsValid || model == null)
+            //    return -1;
 
             using (DatabaseContext db = new DatabaseContext())
             {
-                var result = db.WhoSawWho.SingleOrDefault(a => a.WhoSawID == model.WhoSawID);
+                var result = db.WhoSawWho.First(a => a.WhoSawID == model.WhoSawID);
                 if (result == null) //If this user has never seen another person
                 {
                     WhoSawWho userWhoSaw = new WhoSawWho();
@@ -36,7 +36,7 @@ namespace WhosThatDatabase.Controllers
                     db.WhoSawWho.Add(userWhoSaw);
                     db.SeenUsers.Add(user);
                     db.SaveChanges();
-                    return true;
+                    return 1;
                 }
                 else // if this person has actually seen another person
                 {
@@ -50,7 +50,7 @@ namespace WhosThatDatabase.Controllers
 
                     db.SeenUsers.Add(user);
                     db.SaveChanges();
-                    return true;
+                    return 1;
                 }
             }
         }

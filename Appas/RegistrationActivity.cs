@@ -56,7 +56,7 @@ namespace Appas
             regButton.Click += async (sender, e) =>
             {
                 Console.WriteLine("toastas parodo zinute");
-                bool x = await ApiRequestsUtils.RegistratePersonAsync(IDobj.ID, username, bitmapData);
+                int x = await ApiRequestsUtils.RegistratePersonAsync(IDobj.ID, username, bitmapData);
                 Toast.MakeText(ApplicationContext, "registruoju, palauk   ---------------------------------> " + x, ToastLength.Long).Show();
 
             };
