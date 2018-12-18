@@ -85,16 +85,17 @@ namespace Appas
             
         }
 
-        private void FaceRecognized(object source, FaceRecognizedEventArgs e)
+        private async void FaceRecognized(object source, FaceRecognizedEventArgs e)
         {
             var seenID = e.userID;
             if (seenID != 0)
             {
-                Toast.MakeText(ApplicationContext, "who seen: " + IDobj.ID + "who was seen: " + seenID + " date: " + DateTime.Now, ToastLength.Long).Show();
                 ApiRequestsUtils.AddWhoSawWhoAsync( IDobj.ID, seenID, DateTime.Now.ToString());
 
-                //string vardas = ApiRequestsUtils.GetPersonAsync(seenID);
-            } 
+                string vardas = await ApiRequestsUtils.GetPersonAsync(seenID);
+                Toast.MakeText(ApplicationContext, "The person who used your camera is: " + vardas, ToastLength.Long).Show();
+
+            }
             else
             {
                 Toast.MakeText(ApplicationContext, "Face recognition failed", ToastLength.Long).Show();
