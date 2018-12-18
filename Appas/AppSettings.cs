@@ -35,6 +35,7 @@ namespace Appas
 
         public static string Uri { get
             {
+
                 return "https://whosthatapi.azurewebsites.net/";
             } }
     }
