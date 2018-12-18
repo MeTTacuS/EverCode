@@ -254,7 +254,9 @@ namespace Appas.RecognitionHandler
                     name = string.Empty
                 };
                 var resp = JsonConvert.DeserializeObject<Person>(contentString, jsonSerializerSettings);
+
                 int id =  Int32.Parse(resp.name.ToString());
+                Console.WriteLine("*********************************************************************************************************************" + resp.name);
                 //Toast.MakeText(AuthServiceRequests.context, id.ToString(), ToastLength.Long).Show();
                 return id;
             }
