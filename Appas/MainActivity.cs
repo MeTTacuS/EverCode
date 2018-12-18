@@ -18,6 +18,7 @@ namespace Appas
         private Fragments.DemoFragment demo;
         private Fragments.HistoryFragment demo2;
         private Fragments.PersonFragment person;
+        private Fragments.PopularFragment popularFragment;
         private SupportFragment currentFragment;
 
         private void ShowFragment(SupportFragment fragment)
@@ -57,13 +58,16 @@ namespace Appas
             demo = new Fragments.DemoFragment();
             demo2 = new Fragments.HistoryFragment();
             person = new Fragments.PersonFragment();
+            popularFragment = new Fragments.PopularFragment();
             currentFragment = demo;
 
             transaction.Add(Resource.Id.fragment_container, demo, "demo");
             transaction.Add(Resource.Id.fragment_container, demo2, "demo2");
             transaction.Add(Resource.Id.fragment_container, person, "person");
+            transaction.Add(Resource.Id.fragment_container, popularFragment, "Popular");
             transaction.Hide(demo2);
             transaction.Hide(person);
+            transaction.Hide(popularFragment);
             transaction.Commit();
         }
 
@@ -119,7 +123,7 @@ namespace Appas
             }
             else if (id == Resource.Id.nav_slideshow)
             {
-                ShowFragment(person);
+                ShowFragment(popularFragment);
             }
             else if (id == Resource.Id.nav_manage)
             {

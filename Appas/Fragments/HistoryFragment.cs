@@ -31,7 +31,7 @@ namespace Appas.Fragments
         {
             base.OnStart();
 
-           lstData = View.FindViewById<ListView>(Resource.Id.historyView);
+            lstData = View.FindViewById<ListView>(Resource.Id.historyView);
           
             var showHistoryBtn = View.FindViewById<Button>(Resource.Id.btnShow);
             var _startDateButton = View.FindViewById<Button>(Resource.Id.startDateButton);
