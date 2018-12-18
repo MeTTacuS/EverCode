@@ -165,12 +165,10 @@ namespace Appas.APIUtils
             try
             {
                 queryString = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-                Console.WriteLine("*********00******************22222222222222222222222222222222222222222*********************************************88***" + queryString);
 
             }
             catch (Exception e)
             {
-                Console.WriteLine("*********00******************999999999999999999999999999999999999**********************************************88*** -1");
                 return false;
             }
 
@@ -179,7 +177,6 @@ namespace Appas.APIUtils
             response = await client.PostAsync(uri, queryString);
 
             string contentString = await response.Content.ReadAsStringAsync();
-            Console.WriteLine("*********00******************43333333333333333333333333333333333333333333333333*********************************************88***" + contentString);
             try
             {
                 var jsonSerializerSettings = new JsonSerializerSettings();
@@ -191,7 +188,6 @@ namespace Appas.APIUtils
             }
             catch (Exception e)
             {
-                Console.WriteLine("*********00***************************55555555555555555555555555555555555*************************************88***");
                 return false;
             }
         }

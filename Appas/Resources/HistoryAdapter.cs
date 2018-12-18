@@ -25,9 +25,9 @@ namespace Appas.Resources
     public class HistoryAdapter : BaseAdapter
     {
         private Android.Support.V4.App.Fragment _fragment;
-        private List<HistoryModel> _history;
+        private List<History> _history;
 
-        public HistoryAdapter(Android.Support.V4.App.Fragment fragment, List<HistoryModel> history)
+        public HistoryAdapter(Android.Support.V4.App.Fragment fragment, List<History> history)
         {
             _fragment = fragment;
             _history = history;
@@ -51,7 +51,7 @@ namespace Appas.Resources
 
         public override long GetItemId(int position)
         {
-            return _history[position].ID;
+            return _history[position].Id;
         }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
@@ -61,8 +61,8 @@ namespace Appas.Resources
             var txtDate = view.FindViewById<TextView>(Resource.Id.dateTextView);
             var txtVote = view.FindViewById<TextView>(Resource.Id.voteTextView);
 
-            txtName.Text = _history[position].Username;
-            txtDate.Text = _history[position].date;
+            txtName.Text = _history[position].Name;
+            txtDate.Text = _history[position].Date.ToString();
             txtVote.Text = _history[position].points.ToString();
 
             return view;

@@ -20,7 +20,8 @@ namespace Appas.Fragments
 {
     public class HistoryFragment : Android.Support.V4.App.Fragment
     {
-        List<HistoryModel> lstSource = new List<HistoryModel>();
+        List<History> lstSource = new List<History>();
+        List<HistoryModel> lstSource2 = new List<HistoryModel>();
         ListView lstData;
 
         public override void OnCreate(Bundle savedInstanceState)
@@ -77,32 +78,42 @@ namespace Appas.Fragments
                 lstSource.Clear();
                 try
                 {
-lstSource = await ApiRequestsUtils.GetLatestHistoryAsync(IDobj.ID);
+                    lstSource2 = await ApiRequestsUtils.GetLatestHistoryAsync(IDobj.ID);
 
                 }
                 catch(Exception e)
                 {
-
+                    Console.WriteLine( "*************************************************rafa**********1111111111111");
                 }
 
-              //  for (int i = 0; i < 3; i++)
-               // {
+           /*     for (int i = 0; i < 3; i++)
+                {
 
-                /*    History dataCs = new History()
+                    History dataCs = new History()
                     {
                         Id = i,
                         Name = "abcde" + i,
                         Date = DateTime.Parse("2018-12-05").AddDays(i),
-                        Vote = i
-                    };*/
-                   //    if (dataCs.Date >= _startDate && dataCs.Date <= _endDate)
-                   // lstSource.Add(dataCs);
-                //}
-                if(lstSource != null)
-                {
-var adapter = new HistoryAdapter(this, lstSource);
-                lstData.Adapter = adapter;
+                        points = i
+                    };
+                       if (dataCs.Date >= _startDate && dataCs.Date <= _endDate)
+                    lstSource.Add(dataCs);
                 }
+*/                foreach(HistoryModel mod in lstSource2)
+                {
+                    History dataCs = new History()
+                    {
+                        Id = mod.ID,
+                        Name = mod.Username,
+                        points = mod.points
+                    };
+                }
+
+                
+                
+            var adapter = new HistoryAdapter(this, lstSource);
+                lstData.Adapter = adapter;
+                
                 
             };
 
