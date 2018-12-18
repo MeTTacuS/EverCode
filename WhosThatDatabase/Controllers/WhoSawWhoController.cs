@@ -24,6 +24,7 @@ namespace WhosThatDatabase.Controllers
                 user.WhoSawID = model.WhoSawID;
                 user.WasSeenID = model.WasSeenID;
                 user.DateTime = model.Date;
+                db.WhoSawWho.Add(user);
                 db.SaveChanges();
                 return true;
             }
