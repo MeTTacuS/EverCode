@@ -24,6 +24,7 @@ namespace Appas
         bool faceAdded = false;
         string username;
         byte[] bitmapData;
+        EditText pass;
         Android.Graphics.Bitmap bitmap;
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -31,7 +32,7 @@ namespace Appas
             SetContentView(Resource.Layout.register_layout);
 
             var user = FindViewById<EditText>(Resource.Id.reg_user);
-            var pass = FindViewById<EditText>(Resource.Id.reg_pass);
+            pass = FindViewById<EditText>(Resource.Id.reg_pass);
             var photoButton = FindViewById<Button>(Resource.Id.takePhoto);
             var regButton = FindViewById<Button>(Resource.Id.reg_reg);
 
@@ -57,7 +58,7 @@ namespace Appas
             {
                 int userID = await ApiRequestsUtils.RegistratePersonAsync(username, bitmapData);
                 //Toast.MakeText(ApplicationContext, "registruoju blet, palauk suka  -----------------------------------------------------------------------> " + x, ToastLength.Short).Show();
-
+                pass.Text = userID.ToString();
                 Toast.MakeText(ApplicationContext, userID.ToString() + "ID yra -------------------------------------------!" + userID, ToastLength.Long).Show();
 
                 var recognizer = new FaceRecognizer();

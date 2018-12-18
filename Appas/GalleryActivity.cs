@@ -11,6 +11,8 @@ using Android.Provider;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Appas.APIUtils;
+using Appas.RecognitionHandler;
 
 namespace Appas
 {
@@ -18,7 +20,7 @@ namespace Appas
     public class GalleryActivity : Activity
     {
         const int RequestLocationId = 0;
-
+        Bitmap bitmap;
         readonly string[] PermissionsGroupLocation =
         {
             Android.Manifest.Permission.Camera
@@ -70,13 +72,32 @@ namespace Appas
 
                 try
                 {
-                    Bitmap bitmap = (Bitmap)data.Extras.Get("data");
+                    bitmap = (Bitmap)data.Extras.Get("data");
                     imageView.SetImageBitmap(bitmap);
+
+                    var recognizer = new FaceRecognizer();
+                    recognizer.OnRecognized += FaceRecognized;
+                    recognizer.RecognizeFace(bitmap);
                 }
                 catch (Exception e) { }
             }
             
         }
+
+        private void FaceRecognized(object source, FaceRecognizedEventArgs e)
+        {
+            var seenID = e.userID;
+            if (seenID != 0)
+            {
+                Toast.MakeText(ApplicationContext, "who seen: " + IDobj.ID + "who was seen: " + seenID + " date: " + DateTime.Now, ToastLength.Long).Show();
+                ApiRequestsUtils.AddWhoSawWhoAsync( IDobj.ID, seenID, DateTime.Now);
+            }
+            else
+            {
+                Toast.MakeText(ApplicationContext, "Face recognition failed", ToastLength.Long).Show();
+            }
+        }
+
         async Task TryToGetPermissions()
         {
             if ((int)Build.VERSION.SdkInt >= 23)

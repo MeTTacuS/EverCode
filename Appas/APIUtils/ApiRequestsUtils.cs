@@ -153,7 +153,7 @@ namespace Appas.APIUtils
 
         #endregion
 
-        public static async System.Threading.Tasks.Task<bool> AddWhoSawWhoAsync(int WhoSawID, int WasSeenID, DateTime date)
+        public static async System.Threading.Tasks.Task<int> AddWhoSawWhoAsync(int WhoSawID, int WasSeenID, DateTime date)
         {
             HttpClient client = new HttpClient();
 
@@ -165,10 +165,13 @@ namespace Appas.APIUtils
             try
             {
                 queryString = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                Console.WriteLine("*********00******************22222222222222222222222222222222222222222*********************************************88***" + queryString);
+
             }
             catch (Exception e)
             {
-                return false;
+                Console.WriteLine("*********00******************999999999999999999999999999999999999**********************************************88*** -1");
+                return -1;
             }
 
             HttpResponseMessage response;
@@ -176,19 +179,20 @@ namespace Appas.APIUtils
             response = await client.PostAsync(uri, queryString);
 
             string contentString = await response.Content.ReadAsStringAsync();
-
+            Console.WriteLine("*********00******************43333333333333333333333333333333333333333333333333*********************************************88***" + contentString);
             try
             {
                 var jsonSerializerSettings = new JsonSerializerSettings();
                 jsonSerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
-                var resp = JsonConvert.DeserializeObject<bool>(contentString, jsonSerializerSettings);
+                var resp = JsonConvert.DeserializeObject<int>(contentString, jsonSerializerSettings);
 
+                Console.WriteLine("*********00********************************************************************************************88***" + resp);
                 return resp;
             }
             catch (Exception e)
             {
-
-                return false;
+                Console.WriteLine("*********00***************************55555555555555555555555555555555555*************************************88***");
+                return -1;
             }
         }
 
