@@ -17,13 +17,7 @@ namespace Appas
     [Activity(Label = "GalleryActivity")]
     public class GalleryActivity : Activity
     {
-        const int RequestLocationId = 0;
-
-        readonly string[] PermissionsGroupLocation =
-        {
-            Android.Manifest.Permission.Camera
-        };
-
+        
         ImageView imageView;
         Button _openCamera;
 
@@ -32,7 +26,6 @@ namespace Appas
             base.OnCreate(bundle);
 
             SetContentView(Resource.Layout.demo_layout);
-            await TryToGetPermissions();
 
             var button = FindViewById<Button>(Resource.Id.mygallery);
             imageView = FindViewById<ImageView>(Resource.Id.myphoto);
@@ -77,49 +70,5 @@ namespace Appas
             }
             
         }
-        async Task TryToGetPermissions()
-        {
-            if ((int)Build.VERSION.SdkInt >= 23)
-            {
-                await GetPermissionsAsync();
-                return;
-            }
-        }
-
-        async Task GetPermissionsAsync()
-        {
-            const string permission = Android.Manifest.Permission.Camera;
-
-            if (CheckSelfPermission(permission) == (int)Android.Content.PM.Permission.Granted)
-            {
-              //  Toast.MakeText(this, "Permission granted", ToastLength.Short).Show();
-                return;
-            }
-
-            if (ShouldShowRequestPermissionRationale(permission))
-            {
-                //set Alert for executing task
-                Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);
-                alert.SetTitle("Permission Needed");
-                alert.SetMessage("Need permission to continue");
-                alert.SetPositiveButton("Request permission", (senderAlert, args) =>
-                {
-                    RequestPermissions(PermissionsGroupLocation, RequestLocationId);
-                });
-
-                alert.SetNegativeButton("Cancel", (sendAlert, args) =>
-                {
-                    Toast.MakeText(this, "Cancelled", ToastLength.Short).Show();
-                });
-
-                Dialog dialog = alert.Create();
-                dialog.Show();
-
-                return;
-            }
-            RequestPermissions(PermissionsGroupLocation, RequestLocationId);
-        }
-
-
     }
 }

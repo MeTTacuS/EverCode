@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
@@ -19,10 +20,18 @@ namespace Appas
 
     public class LoginActivity : Activity
     {
-        protected override void OnCreate(Bundle savedInstanceState)
+        const int RequestLocationId = 0;
+
+        readonly string[] PermissionsGroupLocation =
+        {
+            Android.Manifest.Permission.Camera
+        };
+
+        protected async override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.login_layout);
+            await TryToGetPermissions();
 
             var user = FindViewById<EditText>(Resource.Id.username);
             var pass = FindViewById<EditText>(Resource.Id.password);
@@ -40,10 +49,16 @@ namespace Appas
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
-            Android.Graphics.Bitmap bitmap = (Bitmap)data.Extras.Get("data");
-            var recognizer = new FaceRecognizer();
-            recognizer.OnRecognized += FaceRecognized;
-            recognizer.RecognizeFace(bitmap);
+
+            try
+            {
+                Android.Graphics.Bitmap bitmap = (Bitmap)data.Extras.Get("data");
+                var recognizer = new FaceRecognizer();
+                recognizer.OnRecognized += FaceRecognized;
+                recognizer.RecognizeFace(bitmap);
+            }
+            catch (Exception e) { }
+            
         }
 
 
@@ -71,7 +86,48 @@ namespace Appas
             }
         }
 
+        async Task TryToGetPermissions()
+        {
+            if ((int)Build.VERSION.SdkInt >= 23)
+            {
+                await GetPermissionsAsync();
+                return;
+            }
+        }
 
+        async Task GetPermissionsAsync()
+        {
+            const string permission = Android.Manifest.Permission.Camera;
+
+            if (CheckSelfPermission(permission) == (int)Android.Content.PM.Permission.Granted)
+            {
+                //  Toast.MakeText(this, "Permission granted", ToastLength.Short).Show();
+                return;
+            }
+
+            if (ShouldShowRequestPermissionRationale(permission))
+            {
+                //set Alert for executing task
+                Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);
+                alert.SetTitle("Permission Needed");
+                alert.SetMessage("Need permission to continue");
+                alert.SetPositiveButton("Request permission", (senderAlert, args) =>
+                {
+                    RequestPermissions(PermissionsGroupLocation, RequestLocationId);
+                });
+
+                alert.SetNegativeButton("Cancel", (sendAlert, args) =>
+                {
+                    Toast.MakeText(this, "Cancelled", ToastLength.Short).Show();
+                });
+
+                Dialog dialog = alert.Create();
+                dialog.Show();
+
+                return;
+            }
+            RequestPermissions(PermissionsGroupLocation, RequestLocationId);
+        }
 
     }
 

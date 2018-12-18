@@ -17,11 +17,6 @@ namespace Appas
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = false)]
     public class MainActivity : AppCompatActivity, NavigationView.IOnNavigationItemSelectedListener
     {
-        const int RequestLocationId = 0;
-        readonly string[] PermissionsGroupLocation =
-        {
-            Android.Manifest.Permission.Camera
-        };
         private Fragments.DemoFragment demo;
         private Fragments.HistoryFragment demo2;
         private Fragments.PersonFragment person;
@@ -47,10 +42,11 @@ namespace Appas
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
+
             Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
 
-            await TryToGetPermissions();
+            
 
             FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
             fab.Click += FabOnClick;
@@ -151,49 +147,7 @@ namespace Appas
             drawer.CloseDrawer(GravityCompat.Start);
             return true;
         }
-
-        async Task TryToGetPermissions()
-        {
-            if ((int)Build.VERSION.SdkInt >= 23)
-            {
-                await GetPermissionsAsync();
-                return;
-            }
-        }
-
-        async Task GetPermissionsAsync()
-        {
-            const string permission = Android.Manifest.Permission.Camera;
-
-            if (CheckSelfPermission(permission) == (int)Android.Content.PM.Permission.Granted)
-            {
-                //  Toast.MakeText(this, "Permission granted", ToastLength.Short).Show();
-                return;
-            }
-
-            if (ShouldShowRequestPermissionRationale(permission))
-            {
-                //set Alert for executing task
-                Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);
-                alert.SetTitle("Permission Needed");
-                alert.SetMessage("Need permission to continue");
-                alert.SetPositiveButton("Request permission", (senderAlert, args) =>
-                {
-                    RequestPermissions(PermissionsGroupLocation, RequestLocationId);
-                });
-
-                alert.SetNegativeButton("Cancel", (sendAlert, args) =>
-                {
-                    Toast.MakeText(this, "Cancelled", ToastLength.Short).Show();
-                });
-
-                Dialog dialog = alert.Create();
-                dialog.Show();
-
-                return;
-            }
-            RequestPermissions(PermissionsGroupLocation, RequestLocationId);
-        }
+       
     }
 }
 
