@@ -17,7 +17,7 @@ namespace Appas.APIUtils
 {
     class ApiRequestsUtils
     {
-        public static async System.Threading.Tasks.Task<int> RegistratePersonAsync(int ID, string Username, byte[] image)
+        public static async System.Threading.Tasks.Task<bool> RegistratePersonAsync(int ID, string Username, byte[] image)
         {
             HttpClient client = new HttpClient();
 
@@ -28,14 +28,11 @@ namespace Appas.APIUtils
             StringContent queryString = null;
             try
             {
-                Console.WriteLine("Prieitas pirmas patikrinimas");
                 queryString = new StringContent(JsonConvert.SerializeObject(person), Encoding.UTF8, "application/json");
-                Console.WriteLine("PRAEITAS pirmas patikrinimas");
             }
             catch (Exception e)
             {
-                
-                return e.HResult;
+                return false;
             }
 
             HttpResponseMessage response;
@@ -46,17 +43,16 @@ namespace Appas.APIUtils
 
             try
             {
-                Console.WriteLine("prieitas antras patikrinimas");
                 var jsonSerializerSettings = new JsonSerializerSettings();
                 jsonSerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
-                var resp = JsonConvert.DeserializeObject<int>(contentString, jsonSerializerSettings);
-                Console.WriteLine("PRAEITAS antras patikrinimas");
+                var resp = JsonConvert.DeserializeObject<bool>(contentString, jsonSerializerSettings);
+
                 return resp;
             }
             catch (Exception e)
             {
 
-                return e.HResult;
+                return false;
             }
 
         }
