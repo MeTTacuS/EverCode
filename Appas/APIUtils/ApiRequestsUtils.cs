@@ -17,13 +17,13 @@ namespace Appas.APIUtils
 {
     class ApiRequestsUtils
     {
-        public static async System.Threading.Tasks.Task<bool> RegistratePersonAsync(int ID, string Username, byte[] image)
+        public static async System.Threading.Tasks.Task<int> RegistratePersonAsync(string Username, byte[] image)
         {
             HttpClient client = new HttpClient();
 
             string uri = $"{AppSettings.Uri}api/registration";
 
-            RegistrationRequest person = new RegistrationRequest() { ID = ID, Username = Username, image = image };
+            RegistrationRequest person = new RegistrationRequest() {Username = Username, image = image };
 
             StringContent queryString = null;
             try
@@ -32,7 +32,7 @@ namespace Appas.APIUtils
             }
             catch (Exception e)
             {
-                return false;
+                return e.HResult;
             }
 
             HttpResponseMessage response;
@@ -45,14 +45,14 @@ namespace Appas.APIUtils
             {
                 var jsonSerializerSettings = new JsonSerializerSettings();
                 jsonSerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
-                var resp = JsonConvert.DeserializeObject<bool>(contentString, jsonSerializerSettings);
+                var resp = JsonConvert.DeserializeObject<int>(contentString, jsonSerializerSettings);
 
                 return resp;
             }
             catch (Exception e)
             {
 
-                return false;
+                return e.HResult;
             }
 
         }
