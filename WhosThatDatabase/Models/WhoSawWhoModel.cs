@@ -9,6 +9,6 @@ namespace WhosThatDatabase.Models
     {
         public int WhoSawID { get; set; }
         public int WasSeenID { get; set; }
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
     }
 }

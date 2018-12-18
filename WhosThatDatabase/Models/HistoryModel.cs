@@ -8,7 +8,7 @@ namespace WhosThatDatabase.Models
 	public class HistoryModel
 	{
         public string Username { get; set; }
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
         public int Points { get; set; }
 		public int ID { get; set; }
     }

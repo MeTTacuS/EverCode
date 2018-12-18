@@ -32,19 +32,16 @@ namespace WhosThatDatabase.Controllers
 
                     var list = (from l in db.UserInfos
                                 join e in db.LoginInfos on l.ID equals e.ID
-                                join t in db.SeenUsers on l.ID equals t.WhoSawID
                                 where e.ID == id
                                 select new
                                 {
                                     Username = e.Username,
-                                    SeenID = t.SeenUserID,
-                                    Date = t.DateTime,
-                                    Points = l.Points
+                                    Date = result.DateTime,
+                                    Points = l.Points,
+                                    SeenID = result.WasSeenID
                                 }).OrderByDescending(a => a.Date)
                                 .Take(3).ToList();
 
-
-                    
                     foreach (var item in list)
                     {
                         HistoryModel temp = new HistoryModel();

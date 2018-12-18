@@ -25,16 +25,7 @@ namespace WhosThatDatabase.Models
     {
         [Key]
         public int WhoSawID { get; set; }
-        public virtual List<SeenUser> SeenUser { get; set; }
-    }
-
-    public class SeenUser
-    {
-        public DateTime DateTime { get; set; }
-        [Key]
-        public int SeenUserID { get; set; }
-
-        public int WhoSawID { get; set; }
-        public virtual WhoSawWho WhoSawWho { get; set; }
+        public int WasSeenID { get; set; }
+        public string DateTime { get; set; }
     }
 }

@@ -12,24 +12,22 @@ namespace WhosThatDatabase.Controllers
     public class RegistrationController : ApiController
     {
         // POST: api/Registration
-        public bool Post([FromBody]RegistrationModel model)
+        public int Post([FromBody]RegistrationModel model)
         {
             if (!ModelState.IsValid || model == null)
-                return false;
+                return -1;
             using (DatabaseContext db = new DatabaseContext())
             {
                 LoginInfo newLogin = new LoginInfo();
-                newLogin.ID = model.ID;
                 newLogin.Username = model.Username;
                 UserInfo newUser = new UserInfo();
                 newUser.Points = 0;
-                newUser.ImageByteArray = model.ImageByteArray;
-                newUser.ID = model.ID;
+                newUser.ImageByteArray = null;
 
                 db.LoginInfos.Add(newLogin);
                 db.UserInfos.Add(newUser);
                 db.SaveChanges();
-                return true;
+                return newLogin.ID;
             }
         }
     }

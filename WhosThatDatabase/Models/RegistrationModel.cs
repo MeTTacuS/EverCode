@@ -7,8 +7,6 @@ namespace WhosThatDatabase.Models
 {
     public class RegistrationModel
     {
-        public int ID { get; set; }
         public string Username { get; set; }
-        public byte[] ImageByteArray { get; set; }
     }
 }
