@@ -91,8 +91,10 @@ namespace Appas
             if (seenID != 0)
             {
                 Toast.MakeText(ApplicationContext, "who seen: " + IDobj.ID + "who was seen: " + seenID + " date: " + DateTime.Now, ToastLength.Long).Show();
-                ApiRequestsUtils.AddWhoSawWhoAsync( IDobj.ID, seenID, DateTime.Now);
-            }
+                ApiRequestsUtils.AddWhoSawWhoAsync( IDobj.ID, seenID, DateTime.Now.ToString());
+
+                //string vardas = ApiRequestsUtils.GetPersonAsync(seenID);
+            } 
             else
             {
                 Toast.MakeText(ApplicationContext, "Face recognition failed", ToastLength.Long).Show();
