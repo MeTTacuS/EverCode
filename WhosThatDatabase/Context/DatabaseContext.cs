@@ -12,6 +12,5 @@ namespace WhosThatDatabase.Context
         public DbSet<UserInfo> UserInfos { get; set; }
         public DbSet<LoginInfo> LoginInfos { get; set; }
         public DbSet<WhoSawWho> WhoSawWho { get; set; }
-        public DbSet<SeenUser> SeenUsers { get; set; }
     }
 }

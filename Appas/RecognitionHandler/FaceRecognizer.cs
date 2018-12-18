@@ -23,7 +23,7 @@ namespace Appas.RecognitionHandler
     public class FaceRecognizer
     {
         const string OcpApimSubscriptionKey = "Ocp-Apim-Subscription-Key";
-        const string subscriptionKey = "f4ff0a8d3a30477ea495ad08dbb72bd1";
+        const string subscriptionKey = "7b5eeb798a6b46e18fc3250712fb3a62";
         const string uriBase = "https://northeurope.api.cognitive.microsoft.com/face/v1.0/";
         public event FaceRecognizedEventHandler OnRecognized;
         public event FaceAddedEventHandler OnFaceAdded;
